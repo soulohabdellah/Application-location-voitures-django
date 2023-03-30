@@ -18,3 +18,6 @@ def Home(request):
 def Reservation(request,voiture_id):
     voiture=get_object_or_404(Voiture,id=voiture_id)
     return  render(request,'AuthentificationClient.html',{'voiture':voiture})
+def AuthentificationClient(request):
+
+    return  render(request,'AuthentificationClient.html')

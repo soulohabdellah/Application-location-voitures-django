@@ -1,10 +1,11 @@
 
 from django.urls import path
 
-from .views import voitures,voiture,GestionVoitures,contact,AjouterVoiture,Home,Reservation
+from .views import voitures,voiture,GestionVoitures,contact,AjouterVoiture,Home,Reservation,AuthentificationClient
 urlpatterns = [
 path('reserver',voitures, name='voitures'),
     path('',Home),
+path('authentification-client',AuthentificationClient),
     path('reservation/<int:voiture_id>/', Reservation, name='voiture'),
     path('voiture/<int:voiture_id>/',voiture, name='voiture'),
     path('contact/',contact),
