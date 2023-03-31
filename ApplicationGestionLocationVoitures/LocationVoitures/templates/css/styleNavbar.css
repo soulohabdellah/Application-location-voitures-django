@@ -1,4 +1,6 @@
-
+body {
+  padding-top: 80px;
+}
 nav {
   display: flex;
   justify-content: space-between;

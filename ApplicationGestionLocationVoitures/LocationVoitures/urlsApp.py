@@ -11,4 +11,6 @@ path('authentification-client',AuthentificationClient),
     path('contact/',contact),
     path('gestion-cars/',GestionVoitures,name='voitures'),
     path('gestion-cars/add-car', AjouterVoiture),
+    path('create-account/<int:voiture_id>/', Reservation, name='voiture'),
+
 ]

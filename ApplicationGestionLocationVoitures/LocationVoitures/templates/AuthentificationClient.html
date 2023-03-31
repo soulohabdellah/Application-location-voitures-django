@@ -3,7 +3,7 @@
 
 <head>
 <style>
-
+{% include 'css/styleNavbar.css'%}
 </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,9 +31,9 @@
     <input type="password" class="form-control" id="exampleInputPassword1">
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Connexion</button>
 </form>
-    <a href="/create-account"><p>Creer compte</p></a>
+    <a href="/create-account/{{voiture.id}}"><p>Creer compte</p></a>
     </div>
  {% include 'Footer.html' %}
 
