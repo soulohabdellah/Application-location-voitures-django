@@ -33,10 +33,13 @@
 
   <button type="submit" class="btn btn-primary">Connexion</button>
 </form>
-    <a href="/create-account/{{voiture.id}}"><p>Creer compte</p></a>
+    <a href="/location-voitures/create-account"><p>Creer compte</p></a>
     </div>
  {% include 'Footer.html' %}
-
+<script>
+    const id_voiture = localStorage.getItem("voiture_id");
+    console.log(id_voiture);
+</script>
 
 </body>
 

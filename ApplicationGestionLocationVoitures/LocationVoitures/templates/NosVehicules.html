@@ -32,8 +32,8 @@
     <p class="card-text">Model : {{ voiture.Model }}</p>
       <p class="card-text">Marque : {{ voiture.Marque }}</p>
 
+      <button onclick="avancer({{ voiture.id }})" class="btn btn-primary">RÉSÉRVER</button>
 
-    <a href="/location-voitures/reservation/{{voiture.id}}" class="btn btn-primary">RÉSÉRVER</a>
   </div>
 </div>
   </div>
@@ -42,10 +42,15 @@
 </div>
 
 </div>
+ <script>
+ function avancer(voiture_id){
+   const id = voiture_id;
+  localStorage.setItem("voiture_id", id);
+  window.location.href = "/location-voitures/reservation";
+  }
+    </script>
 {% include 'Footer.html' %}
 <!-- Footer -->
-
-
 
 
 

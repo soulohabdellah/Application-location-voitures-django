@@ -15,9 +15,12 @@ def AjouterVoiture(request):
     return  render(request,'AjouterVoiture.html')
 def Home(request):
     return render(request,'Home.html')
-def Reservation(request,voiture_id):
-    voiture=get_object_or_404(Voiture,id=voiture_id)
-    return  render(request,'AuthentificationClient.html',{'voiture':voiture})
+def Reservation(request):
+
+    return  render(request,'AuthentificationClient.html')
 def AuthentificationClient(request):
 
     return  render(request,'AuthentificationClient.html')
+def CreateCompte(request):
+
+    return  render(request,'InscriptionClient.html')

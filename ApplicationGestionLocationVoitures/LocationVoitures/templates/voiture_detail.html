@@ -41,7 +41,7 @@
     <p>Nombre de places : {{ voiture.NombrePlaces }}</p>
       <p>Prix de location : {{ voiture.PrixDeLocation }} DH</p>
 
-    <a href="/location-voitures/reservation/{{voiture.id}}" class="btn btn-primary">RÉSÉRVER</a>
+      <button onclick="avancer({{ voiture.id }})" class="btn btn-primary">RÉSÉRVER</button>
   </div>
 </div>
   </div>
@@ -50,7 +50,13 @@
 </div>
 
 </div>
-
+ <script>
+ function avancer(voiture_id){
+   const id = voiture_id;
+  localStorage.setItem("voiture_id", id);
+  window.location.href = "/location-voitures/reservation";
+  }
+    </script>
 {% include 'Footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
