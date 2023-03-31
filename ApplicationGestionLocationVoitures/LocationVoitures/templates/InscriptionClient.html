@@ -20,7 +20,8 @@
 {% include 'Navbar.html' %}
 
     <div class="container">
-<form action="{{action}}" method="post">
+<form action="/location-voitures/create-account/add-user" method="post">
+         {% csrf_token %}
   <div class="mb-3">
     <label  class="form-label">Email adresse</label>
     <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">

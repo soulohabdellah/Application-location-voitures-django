@@ -1,5 +1,6 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import Voiture
+from .Forms import ClientForm
 def voitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'NosVehicules.html',{'voitures':voitures})
@@ -24,3 +25,12 @@ def AuthentificationClient(request):
 def CreateCompte(request):
 
     return  render(request,'InscriptionClient.html')
+def AjouterClient(request):
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ClientForm()
+    return render(request, 'Home.html', {'form': form})
