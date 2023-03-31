@@ -30,7 +30,7 @@ def AjouterClient(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('/location-voitures')
     else:
         form = ClientForm()
     return render(request, 'Home.html', {'form': form})
