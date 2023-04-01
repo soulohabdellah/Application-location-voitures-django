@@ -21,15 +21,16 @@
 {% include 'Navbar.html' %}
 <div class="container">
     </br> </br> </br>
-<form>
+<form action="/location-voitures/authentification-client/authentifier" method="post">
+     {% csrf_token %}
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="Email" class="form-label">Email address</label>
+<input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <label for="Password" class="form-label">Password</label>
+<input type="password" class="form-control" id="Password" name="Password">
   </div>
 
   <button type="submit" class="btn btn-primary">Connexion</button>

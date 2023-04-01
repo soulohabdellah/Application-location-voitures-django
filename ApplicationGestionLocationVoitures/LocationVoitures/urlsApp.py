@@ -1,7 +1,7 @@
 
 from django.urls import path
 
-from .views import voitures,voiture,GestionVoitures,contact,AjouterVoiture,Home,Reservation,AuthentificationClient,CreateCompte,AjouterClient,CreerMessage
+from .views import voitures,voiture,GestionVoitures,contact,AjouterVoiture,Home,Reservation,AuthentificationClient,CreateCompte,AjouterClient,CreerMessage,GestionAuthentification
 urlpatterns = [
 path('reserver',voitures, name='voitures'),
     path('',Home),
@@ -14,5 +14,6 @@ path('authentification-client',AuthentificationClient),
     path('gestion-cars/add-car', AjouterVoiture),
     path('create-account/', CreateCompte, name='voiture'),
     path('create-account/add-user', AjouterClient, name='voiture'),
+    path('authentification-client/authentifier',GestionAuthentification),
 
 ]
