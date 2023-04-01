@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Voiture
 from .Forms import ClientForm,MessageForm
+from  django.contrib.auth.hashers import make_password
 def voitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'NosVehicules.html',{'voitures':voitures})
@@ -29,7 +30,9 @@ def AjouterClient(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
-            form.save()
+            client = form.save(commit=False)
+            client.Password = make_password(form.cleaned_data['Password'])
+            client.save()
             return redirect('/location-voitures')
     else:
         form = ClientForm()
