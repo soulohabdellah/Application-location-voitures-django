@@ -8,4 +8,4 @@ class ClientForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = '__all__'
+        fields = [ 'Email','Nom', 'Message']

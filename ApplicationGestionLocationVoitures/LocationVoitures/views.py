@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Voiture
-from .Forms import ClientForm
+from .Forms import ClientForm,MessageForm
 def voitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'NosVehicules.html',{'voitures':voitures})
@@ -8,7 +8,7 @@ def voiture(request,voiture_id):
     voiture=get_object_or_404(Voiture,id=voiture_id)
     return  render(request,'voiture_detail.html',{'voiture':voiture})
 def contact(request):
-    return render(request, 'Contact.html')
+    return render(request, 'Contact.html',{'message':' '})
 def GestionVoitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'GestionVoitures.html',{'voitures':voitures})
@@ -33,4 +33,13 @@ def AjouterClient(request):
             return redirect('/location-voitures')
     else:
         form = ClientForm()
+    return render(request, 'Home.html', {'form': form})
+def CreerMessage(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Contact.html', {'message': 'Message bien envoyée'})
+    else:
+        form = MessageForm()
     return render(request, 'Home.html', {'form': form})
