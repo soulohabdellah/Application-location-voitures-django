@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Voiture
-from .Forms import ClientForm,MessageForm
+from .Forms import ClientForm,MessageForm,ClientAuthentificationForm
 from  django.contrib.auth.hashers import make_password
 def voitures(request):
     voitures=Voiture.objects.all()
@@ -45,4 +45,15 @@ def CreerMessage(request):
             return render(request, 'Contact.html', {'message': 'Message bien envoyée'})
     else:
         form = MessageForm()
+    return render(request, 'Home.html', {'form': form})
+def AuthentificationClient(request):
+    if request.method == 'POST':
+        form = ClientAuthentificationForm(request.POST)
+        if form.is_valid():
+            client = form.save(commit=False)
+            client.Password = make_password(form.cleaned_data['Password'])
+            client.save()
+            return redirect('/location-voitures')
+    else:
+        form = ClientForm()
     return render(request, 'Home.html', {'form': form})
