@@ -15,7 +15,7 @@ def GestionVoitures(request):
 def AjouterVoiture(request):
     return  render(request,'AjouterVoiture.html')
 def Home(request):
-    return render(request,'homeMain.html')
+    return render(request,'Home.html')
 def Reservation(request):
 
     return  render(request,'AuthentificationClient.html')
