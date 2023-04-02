@@ -1,5 +1,8 @@
 from django.shortcuts import render,get_object_or_404,redirect
+from django.contrib.auth import authenticate, login
 from .models import Voiture,Client
+from django.contrib.auth import logout
+from .models import Voiture
 from .Forms import ClientForm,MessageForm,ClientAuthentificationForm
 from  django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
@@ -11,9 +14,15 @@ def voitures(request):
 def voiture(request,voiture_id):
     voiture=get_object_or_404(Voiture,id=voiture_id)
     return  render(request,'voiture_detail.html',{'voiture':voiture})
-@login_required(login_url='/location-voitures/authentification-client')
+
 def contact(request):
-    return render(request, 'Contact.html',{'message':' '})
+        client_id = request.session.get('client_id')
+        if client_id:
+            return render(request, 'Contact.html', {'message': ''})
+        else:
+            return render(request, 'AuthentificationClient.html', {'message': ''})
+
+
 def GestionVoitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'GestionVoitures.html',{'voitures':voitures})
@@ -33,10 +42,14 @@ def CreateCompte(request):
 def AjouterClient(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
+
         if form.is_valid():
             client = form.save(commit=False)
             client.Password = make_password(form.cleaned_data['Password'])
             client.save()
+            request.session['client_id'] = client.id
+            request.session['client_name'] = client.Nom
+
             return redirect('/location-voitures')
     else:
         form = ClientForm()
@@ -51,6 +64,7 @@ def CreerMessage(request):
     else:
         form = MessageForm()
     return render(request, 'Home.html', {'form': form})
+
 def GestionAuthentification(request):
     if request.method == 'POST':
         email = request.POST['Email']
@@ -62,6 +76,8 @@ def GestionAuthentification(request):
             return render(request, 'AuthentificationClient.html', {'form': form, 'error_message': error_message})
         for client in clients:
             if check_password(password, client.Password):
+                request.session['client_id'] = client.id
+                request.session['client_name'] = client.Nom
                 return redirect('/location-voitures')
         error_message = 'Invalid email or password'
         form = ClientAuthentificationForm()
@@ -69,3 +85,13 @@ def GestionAuthentification(request):
     else:
         form = ClientAuthentificationForm()
     return render(request, 'AuthentificationClient.html', {'form': form})
+
+def ReservationInfo(request):
+    return render(request, 'InfoReservation.html')
+
+
+def deconnexion(request):
+    if 'client_id' in request.session:
+        del request.session['client_id']
+    logout(request)
+    return redirect('/location-voitures')
