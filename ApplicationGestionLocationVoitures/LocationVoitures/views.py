@@ -30,9 +30,17 @@ def AjouterVoiture(request):
     return  render(request,'AjouterVoiture.html')
 def Home(request):
     return render(request,'Home.html')
-def Reservation(request):
+def Reservation(request,voiture_id):
+    client_id = request.session.get('client_id')
+    if 'voiture_id' in request.session:
+     del request.session['voiture_id']
+    request.session['voiture_id'] = voiture_id
+    voiture = get_object_or_404(Voiture, id=voiture_id)
+    if client_id:
+        return render(request, 'InfoReservation.html', {'voiture': voiture})
+    else:
+        return  render(request,'AuthentificationClient.html')
 
-    return  render(request,'AuthentificationClient.html')
 def AuthentificationClient(request):
 
     return  render(request,'AuthentificationClient.html')
