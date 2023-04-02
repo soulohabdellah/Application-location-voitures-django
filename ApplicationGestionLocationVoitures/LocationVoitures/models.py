@@ -24,6 +24,11 @@ class Message(models.Model):
     Message = models.CharField(max_length=1000)
     Lu=models.BooleanField(default=False)
 
-
+class Reservation(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    voiture = models.ForeignKey(Voiture, on_delete=models.CASCADE)
+    date_debut = models.DateTimeField()
+    date_fin = models.DateTimeField()
+    prix_total = models.FloatField()
 
 

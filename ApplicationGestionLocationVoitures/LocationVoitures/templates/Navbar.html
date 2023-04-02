@@ -8,15 +8,19 @@
       <li><a href="/location-voitures/reserver">RÉSÉRVER</a></li>
       <li>     <a  href="/location-voitures/gestion-cars">NOS VÉHICULE</a></li>
       <li>  <a  href="/location-voitures/contact">CONTACT</a></li>
-      <li>   <a  href="/location-voitures/authentification-client">CONNEXION</a></li>
 
+{% if request.session.client_id %}
+      <li>   <a  href="/location-voitures/Profil">Profil</a></li>
+   <li>   <a  href="/location-voitures/deconnexion">DECONNEXION</a></li>
+{% else %}
+   <li>   <a  href="/location-voitures/authentification-client">CONNEXION</a></li>
+{% endif %}
     </ul>
   </div>
   <div class="search">
     <input type="text" placeholder="Rechercher...">
     <button type="submit">OK</button>
+
   </div>
-  <div class="toggle">
-    <i class="fas fa-bars"></i>
-  </div>
+
 </nav>
