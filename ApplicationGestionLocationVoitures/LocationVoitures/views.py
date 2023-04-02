@@ -97,9 +97,19 @@ def GestionAuthentification(request):
 def ReservationInfo(request):
     return render(request, 'InfoReservation.html')
 
-
+def CreateReservation(request):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Contact.html', {'message': 'Message bien envoyée'})
+    else:
+        form = MessageForm()
+    return render(request, 'Home.html', {'form': form})
 def deconnexion(request):
     if 'client_id' in request.session:
         del request.session['client_id']
+    if 'voiture_id' in request.session:
+        del request.session['voiture_id']
     logout(request)
     return redirect('/location-voitures')

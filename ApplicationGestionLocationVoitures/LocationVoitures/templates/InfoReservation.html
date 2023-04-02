@@ -3,7 +3,7 @@
 <head>
     <style>
         {% include 'css/style.css' %}
-{% include 'css/styleNavbar.css'%}
+        {% include 'css/styleNavbar.css'%}
     </style>
 	<title>Reservation détails</title>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
@@ -14,35 +14,51 @@
 <body>
 {% include 'Navbar.html' %}
 </br></br></br>
-	<div class="container mt-5">
-	  <h2>Planification de reservation</h2>
-	  <form>
-	    <div class="form-group">
-	      <label for="depart">Date et heure de départ :</label>
-	      <div class="input-group date" id="depart" data-target-input="nearest">
-	        <input type="text" class="form-control datetimepicker-input" data-target="#depart"/>
-	        <div class="input-group-append" data-target="#depart" data-toggle="datetimepicker">
-	          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="form-group">
-	      <label for="arrivee">Date et heure de fin :</label>
-	      <div class="input-group date" id="arrivee" data-target-input="nearest">
-	        <input type="text" class="form-control datetimepicker-input" data-target="#arrivee"/>
-	        <div class="input-group-append" data-target="#arrivee" data-toggle="datetimepicker">
-	          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-	        </div>
-	      </div>
-            </br>
-	    </div>
-	    <button type="submit" class="btn btn-primary">Reserver</button>
-	  </form>
-	</div>
-</br></br></br>
-<script>
-	console.log();
-</script>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Planification de reservation</h2>
+      <form action="/location-voitures/reservation/create-reservation" method="post">
+        <div class="form-group">
+          <label for="depart">Date et heure de départ :</label>
+          <div class="input-group date" id="depart" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" data-target="#depart"/>
+            <div class="input-group-append" data-target="#depart" data-toggle="datetimepicker">
+              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="arrivee">Date et heure de fin :</label>
+          <div class="input-group date" id="arrivee" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" data-target="#arrivee"/>
+            <div class="input-group-append" data-target="#arrivee" data-toggle="datetimepicker">
+              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Reserver</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="card" >
+        <img src="{{ voiture.MainImage }}" class="card-img-top custom-img-size" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Name : {{ voiture.Name}}</h5>
+          <p class="card-text">Model : {{ voiture.Model }}</p>
+          <p class="card-text">Marque : {{ voiture.Marque }}</p>
+          <p>Boite vitesse : {{ voiture.BoiteVitesse}}</p>
+          <p>Couleur : {{ voiture.Couleur }}</p>
+          <p>Kilometrage : {{ voiture.Kilometrage }}</p>
+          <p>Nombre de places : {{ voiture.NombrePlaces }}</p>
+          <p>Prix de location : {{ voiture.PrixDeLocation }} DH</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
