@@ -10,26 +10,26 @@ from django.contrib.auth.decorators import login_required
 
 def voitures(request):
     voitures=Voiture.objects.all()
-    return  render(request,'NosVehicules.html',{'voitures':voitures})
+    return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures})
 def voiture(request,voiture_id):
     voiture=get_object_or_404(Voiture,id=voiture_id)
-    return  render(request,'voiture_detail.html',{'voiture':voiture})
+    return  render(request,'InterfaceClient/voiture_detail.html',{'voiture':voiture})
 
 def contact(request):
         client_id = request.session.get('client_id')
         if client_id:
-            return render(request, 'Contact.html', {'message': ''})
+            return render(request, 'InterfaceClient/Contact.html', {'message': ''})
         else:
-            return render(request, 'AuthentificationClient.html', {'message': ''})
+            return render(request, 'InterfaceClient/AuthentificationClient.html', {'message': ''})
 
 
 def GestionVoitures(request):
     voitures=Voiture.objects.all()
-    return  render(request,'GestionVoitures.html',{'voitures':voitures})
+    return  render(request,'InterfaceClient/GestionVoitures.html',{'voitures':voitures})
 def AjouterVoiture(request):
-    return  render(request,'AjouterVoiture.html')
+    return  render(request,'InterfaceClient/AjouterVoiture.html')
 def Home(request):
-    return render(request,'Home.html')
+    return render(request,'InterfaceClient/Home.html')
 def Reservation(request,voiture_id):
     client_id = request.session.get('client_id')
     if 'voiture_id' in request.session:
@@ -37,16 +37,16 @@ def Reservation(request,voiture_id):
     request.session['voiture_id'] = voiture_id
     voiture = get_object_or_404(Voiture, id=voiture_id)
     if client_id:
-        return render(request, 'InfoReservation.html', {'voiture': voiture})
+        return render(request, 'InterfaceClient/InfoReservation.html', {'voiture': voiture})
     else:
-        return  render(request,'AuthentificationClient.html')
+        return  render(request,'InterfaceClient/AuthentificationClient.html')
 
 def AuthentificationClient(request):
 
-    return  render(request,'AuthentificationClient.html')
+    return  render(request,'InterfaceClient/AuthentificationClient.html')
 def CreateCompte(request):
 
-    return  render(request,'InscriptionClient.html')
+    return  render(request,'InterfaceClient/InscriptionClient.html')
 def AjouterClient(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
@@ -61,17 +61,17 @@ def AjouterClient(request):
             return redirect('/location-voitures')
     else:
         form = ClientForm()
-    return render(request, 'Home.html', {'form': form})
+    return render(request, 'InterfaceClient/Home.html', {'form': form})
 
 def CreerMessage(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'Contact.html', {'message': 'Message bien envoyée'})
+            return render(request, 'InterfaceClient/Contact.html', {'message': 'Message bien envoyée'})
     else:
         form = MessageForm()
-    return render(request, 'Home.html', {'form': form})
+    return render(request, 'InterfaceClient/Home.html', {'form': form})
 
 def GestionAuthentification(request):
     if request.method == 'POST':
@@ -81,7 +81,7 @@ def GestionAuthentification(request):
         if not clients:
             error_message = 'Invalid email or password'
             form = ClientAuthentificationForm()
-            return render(request, 'AuthentificationClient.html', {'form': form, 'error_message': error_message})
+            return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'error_message': error_message})
         for client in clients:
             if check_password(password, client.Password):
                 request.session['client_id'] = client.id
@@ -89,23 +89,23 @@ def GestionAuthentification(request):
                 return redirect('/location-voitures')
         error_message = 'Invalid email or password'
         form = ClientAuthentificationForm()
-        return render(request, 'AuthentificationClient.html', {'form': form, 'error_message': error_message})
+        return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'error_message': error_message})
     else:
         form = ClientAuthentificationForm()
-    return render(request, 'AuthentificationClient.html', {'form': form})
+    return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form})
 
 def ReservationInfo(request):
-    return render(request, 'InfoReservation.html')
+    return render(request, 'InterfaceClient/InfoReservation.html')
 
 def CreateReservation(request):
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'Contact.html', {'message': 'Message bien envoyée'})
+            return render(request, 'InterfaceClient/Contact.html', {'message': 'Message bien envoyée'})
     else:
         form = MessageForm()
-    return render(request, 'Home.html', {'form': form})
+    return render(request, 'InterfaceClient/Home.html', {'form': form})
 def deconnexion(request):
     if 'client_id' in request.session:
         del request.session['client_id']
