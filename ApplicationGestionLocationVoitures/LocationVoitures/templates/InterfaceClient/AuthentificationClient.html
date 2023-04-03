@@ -18,7 +18,7 @@
 </head>
 
 <body>
-{% include 'Navbar.html' %}
+{% include 'InterfaceClient/Navbar.html' %}
 <div class="container">
     </br> </br> </br>
 <form action="/location-voitures/authentification-client/authentifier" method="post">
@@ -38,7 +38,7 @@
     <a href="/location-voitures/create-account"><p>Creer compte</p></a>
     </div>
 </br> </br> </br>
- {% include 'Footer.html' %}
+ {% include 'InterfaceClient/Footer.html' %}
 <script>
     const id_voiture = localStorage.getItem("voiture_id");
     console.log(id_voiture);

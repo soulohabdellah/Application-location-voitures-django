@@ -96,14 +96,14 @@ def ReservationInfo(request):
     return render(request, 'InterfaceClient/InfoReservation.html')
 
 def CreateReservation(request):
+    voiture = Voiture.objects.get(id=request.session['voiture_id'])
     if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'InterfaceClient/Contact.html', {'message': 'Message bien envoyée'})
-    else:
-        form = MessageForm()
-    return render(request, 'InterfaceClient/Home.html', {'form': form})
+        client = Client.objects.get(id=request.session['client_id'])
+        date_debut = request.POST['debut']
+        date_fin = request.POST['arrive']
+        prix_total = 7000
+        reservation = Reservation(client=client, voiture=voiture, date_debut=date_debut, date_fin=date_fin,prix_total=prix_total)
+        reservation.save()
 def deconnexion(request):
     if 'client_id' in request.session:
         del request.session['client_id']
