@@ -5,7 +5,7 @@ from .models import Voiture
 from .Forms import ClientForm,MessageForm,ClientAuthentificationForm
 from  django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
-
+from django.utils import timezone
 def voitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures})
@@ -96,13 +96,14 @@ def ReservationInfo(request):
     return render(request, 'InterfaceClient/InfoReservation.html')
 
 def CreateReservation(request):
-    voiture = Voiture.objects.get(id=request.session['voiture_id'])
+
     if request.method == 'POST':
-        client = Client.objects.get(id=request.session['client_id'])
+        voiture = get_object_or_404(Voiture, id=request.session['voiture_id'])
+        client = get_object_or_404(Client, id=request.session['client_id'])
         date_debut = request.POST['debut']
         date_fin = request.POST['arrive']
         prix_total = 7000
-        reservation = Reservation(client=client, voiture=voiture, date_debut=date_debut, date_fin=date_fin,prix_total=prix_total)
+        reservation = Reservation(client=client, voiture=voiture, date_debut=timezone.now(), date_fin=timezone.now(),prix_total=prix_total)
         reservation.save()
 def deconnexion(request):
     if 'client_id' in request.session:

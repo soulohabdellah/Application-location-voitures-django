@@ -25,17 +25,13 @@ class Message(models.Model):
     Lu=models.BooleanField(default=False)
 
 class Reservation(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    voiture = models.ForeignKey(Voiture, on_delete=models.CASCADE)
+    client = models.OneToOneField(Client, on_delete=models.CASCADE)
+    voiture = models.OneToOneField(Voiture, on_delete=models.CASCADE)
     date_debut = models.DateTimeField()
     date_fin = models.DateTimeField()
     prix_total = models.FloatField()
-    def __init__(self, client=None, voiture=None, date_debut=None, date_fin=None, prix_total=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.client = client
-        self.voiture = voiture
-        self.date_debut = date_debut
-        self.date_fin = date_fin
-        self.prix_total = prix_total
+
+
+
 
 
