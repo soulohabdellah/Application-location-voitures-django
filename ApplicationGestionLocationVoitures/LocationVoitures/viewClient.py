@@ -1,11 +1,11 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import Voiture,Client
+from .models import Voiture,Client,Reservation
 from django.contrib.auth import logout
 from .models import Voiture
 from .Forms import ClientForm,MessageForm,ClientAuthentificationForm
 from  django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
-from django.utils import timezone
+from datetime import datetime
 def voitures(request):
     voitures=Voiture.objects.all()
     return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures})
@@ -28,7 +28,7 @@ def AjouterVoiture(request):
     return  render(request,'InterfaceClient/AjouterVoiture.html')
 def Home(request):
     return render(request,'InterfaceClient/Home.html')
-def Reservation(request,voiture_id):
+def ReservationVoiture(request,voiture_id):
     client_id = request.session.get('client_id')
     if 'voiture_id' in request.session:
      del request.session['voiture_id']
@@ -97,14 +97,22 @@ def ReservationInfo(request):
 
 def CreateReservation(request):
 
+    format_string = "%d/%m/%Y %H:%M:%S"
     if request.method == 'POST':
-        voiture = get_object_or_404(Voiture, id=request.session['voiture_id'])
-        client = get_object_or_404(Client, id=request.session['client_id'])
-        date_debut = request.POST['debut']
-        date_fin = request.POST['arrive']
-        prix_total = 7000
-        reservation = Reservation(client=client, voiture=voiture, date_debut=timezone.now(), date_fin=timezone.now(),prix_total=prix_total)
+        myvoiture_id = request.session.get('voiture_id')
+        myclient_id = request.session.get('client_id')
+        if not myvoiture_id or not myclient_id:
+            return render(request, 'InterfaceClient/InfoReservation.html')
+        myvoiture = get_object_or_404(Voiture, id=myvoiture_id)
+        myclient = get_object_or_404(Client, id=myclient_id)
+        date_debut = datetime.strptime(request.POST['debut'], format_string).date()
+        date_fin = datetime.strptime(request.POST['arrive'], format_string).date()
+        diff = (date_fin - date_debut).days
+        prixtotal=diff*myvoiture.PrixDeLocation
+        reservation = Reservation(client=myclient, voiture=myvoiture, date_debut=date_debut, date_fin=date_fin, prix_total=prixtotal)
         reservation.save()
+        return render(request, 'InterfaceClient/Home.html')
+
 def deconnexion(request):
     if 'client_id' in request.session:
         del request.session['client_id']
