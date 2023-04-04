@@ -116,10 +116,8 @@ def CreateReservation(request):
 def ProfilClient(request):
     client_id = request.session.get('client_id')
     if client_id:
-        myclient_id = request.session.get('client_id')
-        myclient = get_object_or_404(Client, id=myclient_id)
-        reservations = Reservation.objects.all()
-        return render(request, 'InterfaceClient/ProfilClient.html', {'reservations': reservations})
+            reservations = Reservation.FindByClient(client_id)
+            return render(request, 'InterfaceClient/ProfilClient.html', {'reservations': reservations})
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html', {'message': ''})
 

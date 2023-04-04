@@ -38,7 +38,10 @@ class Reservation(models.Model):
         self.date_debut = date_debut
         self.date_fin = date_fin
         self.prix_total = prix_total
-
-
+    @classmethod
+    def FindByClient(cls, client_id):
+        reservations = cls.objects.filter(client_id=client_id).values_list('prix_total', 'date_debut','date_fin','voiture__Name')
+        listres = [{'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'),'fin':item[2].strftime('%d/%m/%Y'),'voiture':item[3]} for item in reservations]
+        return listres
 
 

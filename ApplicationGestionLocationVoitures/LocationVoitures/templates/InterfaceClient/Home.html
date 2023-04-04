@@ -16,15 +16,20 @@
     <title>Location des voitures</title>
   </head>
 <body>
+<div class="container">
+    {% include 'InterfaceClient/Navbar.html' %}
 
-{% include 'InterfaceClient/Navbar.html' %}
 
-{% include 'InterfaceClient/Hero.html' %}
+<div class="container">
+  {% include 'InterfaceClient/Action.html' %}
+</div>
+    </br>
+  {% include 'InterfaceClient/Hero.html' %}
 </br>
 {% include 'InterfaceClient/Features.html' %}
-</br>
-{% include 'InterfaceClient/Action.html' %}
 
+
+</div>
 
 {% include 'InterfaceClient/Footer.html' %}
 <!-- Footer -->

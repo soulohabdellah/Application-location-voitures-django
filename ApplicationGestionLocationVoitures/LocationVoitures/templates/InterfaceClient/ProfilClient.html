@@ -17,19 +17,21 @@
 {% include 'InterfaceClient/Navbar.html' %}
 </br></br></br><div class="container mt-5">
   <div class="row">
-    <div class="col-md-6">
 
+    <div class="col-md-6">
+<h2>Historique des reservations</h2>
 
  {% for reservation in reservations %}
-  <div class="col-sm-3">
+
    <div class="card" >
 
   <div class="card-body">
-    <a href=""><h5 class="card-title">Name : {{ reservation.id}}</h5></a>
+      <h5 class="card-title"><strong>{{ reservation.voiture }}</strong> de <strong>{{ reservation.debut }}</strong> à <strong>{{ reservation.fin }}</strong>  avec <strong>{{ reservation.prix }} DH</strong></h5>
+
 
   </div>
 </div>
-  </div>
+
     {% endfor %}
 
     </div>
@@ -38,22 +40,38 @@
 
       <div class="row">
         <h2>Changer les informations de compte</h2>
-       <form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+ <form action="/location-voitures/profil/update-compte" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="Email">Email adresse</label>
+                <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="CinOrPassportId">CIN ou Numéro de passport</label>
+                <input type="number" class="form-control" id="CinOrPassportId" name="CinOrPassportId" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Nom">Nom</label>
+                <input type="text" class="form-control" id="Nom" name="Nom" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Prenom">Prenom</label>
+                <input type="text" class="form-control" id="Prenom" name="Prenom" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Telephone">Telephone</label>
+                <input type="text" class="form-control" id="Telephone" name="Telephone" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Password">Password</label>
+                <input type="password" class="form-control" id="Password" name="Password">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="Adresse">Adresse</label>
+                <input type="text" class="form-control" id="Adresse" name="Adresse" aria-describedby="emailHelp">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
       </div>
     </div>
   </div>
