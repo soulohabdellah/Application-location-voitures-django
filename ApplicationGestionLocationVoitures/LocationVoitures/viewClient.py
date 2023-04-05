@@ -11,13 +11,13 @@ def voitures(request):
     return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures})
 def voiture(request,voiture_id):
     voiture=get_object_or_404(Voiture,id=voiture_id,Disponible=True)
-    return  render(request,'InterfaceClient/voiture_detail.html',{'voiture':voiture})
+    if voiture:
+        return  render(request,'InterfaceClient/voiture_detail.html',{'voiture':voiture})
+    else:
+         return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures,'message':'Voiture introuvable'})
+
 def contact(request):
-        client_id = request.session.get('client_id')
-        if client_id:
-            return render(request, 'InterfaceClient/Contact.html', {'message': ''})
-        else:
-            return render(request, 'InterfaceClient/AuthentificationClient.html', {'message': ''})
+        return render(request, 'InterfaceClient/Contact.html')
 
 def Home(request):
     return render(request,'InterfaceClient/Home.html')
@@ -36,7 +36,6 @@ def AuthentificationClient(request):
 
     return  render(request,'InterfaceClient/AuthentificationClient.html')
 def CreateCompte(request):
-
     return  render(request,'InterfaceClient/InscriptionClient.html')
 def AjouterClient(request):
     if request.method == 'POST':
@@ -71,7 +70,7 @@ def GestionAuthentification(request):
         if not clients:
             error_message = 'Invalid email or password'
             form = ClientAuthentificationForm()
-            return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'error_message': error_message})
+            return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'message': error_message})
         for client in clients:
             if check_password(password, client.Password):
                 request.session['client_id'] = client.id
@@ -79,7 +78,7 @@ def GestionAuthentification(request):
                 return redirect('/location-voitures')
         error_message = 'Invalid email or password'
         form = ClientAuthentificationForm()
-        return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'error_message': error_message})
+        return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'message': error_message})
     else:
         form = ClientAuthentificationForm()
     return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form})
@@ -89,10 +88,11 @@ def ReservationInfo(request):
     if client_id:
         return render(request, 'InterfaceClient/InfoReservation.html')
     else:
-        return render(request, 'InterfaceClient/AuthentificationClient.html', {'message': ''})
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
 
 def CreateReservation(request):
-
+ client_id = request.session.get('client_id')
+ if client_id:
     format_string = "%d/%m/%Y %H:%M:%S"
     if request.method == 'POST':
         myvoiture_id = request.session.get('voiture_id')
@@ -111,15 +111,17 @@ def CreateReservation(request):
         myvoiture.save()
         if 'voiture_id' in request.session:
             del request.session['voiture_id']
-
-        return render(request, 'InterfaceClient/ProfilClient.html')
+        return render(request, 'InterfaceClient/ProfilClient.html',{'message':'Reservation bien creer'})
+ else:
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
 def ProfilClient(request):
     client_id = request.session.get('client_id')
     if client_id:
             reservations = Reservation.FindByClient(client_id)
-            return render(request, 'InterfaceClient/ProfilClient.html', {'reservations': reservations})
+            myclient = get_object_or_404(Client, id=client_id)
+            return render(request, 'InterfaceClient/ProfilClient.html', {'reservations': reservations,'client':myclient})
     else:
-        return render(request, 'InterfaceClient/AuthentificationClient.html', {'message': ''})
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
 
 def deconnexion(request):
     if 'client_id' in request.session:
@@ -128,3 +130,21 @@ def deconnexion(request):
         del request.session['voiture_id']
     logout(request)
     return redirect('/location-voitures')
+def UpdateCompte(request):
+    client_id = request.session.get('client_id')
+
+    if client_id:
+        if request.method == 'POST':
+            client = get_object_or_404(Client, id=client_id)
+            client.CinOrPassportId = request.POST.get('CinOrPassportId')
+            client.Email = request.POST.get('Email')
+            client.Nom = request.POST.get('Nom')
+            client.Prenom = request.POST.get('Prenom')
+            client.Telephone = request.POST.get('Telephone')
+            client.Adresse = request.POST.get('Adresse')
+            client.Password = make_password(request.POST.get('Password'))
+            client.save()
+            return redirect('/location-voitures/profil/')
+    else:
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
+

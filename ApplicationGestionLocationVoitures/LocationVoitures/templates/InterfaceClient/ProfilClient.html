@@ -44,23 +44,23 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label class="form-label" for="Email">Email adresse</label>
-                <input type="email" class="form-control" id="Email" name="Email" aria-describedby="emailHelp">
+                <input type="email" class="form-control" id="Email" name="Email" value="{{client.Email}}" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="CinOrPassportId">CIN ou Numéro de passport</label>
-                <input type="number" class="form-control" id="CinOrPassportId" name="CinOrPassportId" aria-describedby="emailHelp">
+                <input type="number" class="form-control" id="CinOrPassportId" value="{{client.CinOrPassportId}}" name="CinOrPassportId" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Nom">Nom</label>
-                <input type="text" class="form-control" id="Nom" name="Nom" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="Nom" value="{{client.Nom}}" name="Nom" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Prenom">Prenom</label>
-                <input type="text" class="form-control" id="Prenom" name="Prenom" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="Prenom" name="Prenom" value="{{client.Prenom}}" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Telephone">Telephone</label>
-                <input type="text" class="form-control" id="Telephone" name="Telephone" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="Telephone" name="Telephone" value="{{client.Telephone}}" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Password">Password</label>
@@ -68,7 +68,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="Adresse">Adresse</label>
-                <input type="text" class="form-control" id="Adresse" name="Adresse" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="Adresse" name="Adresse" value="{{client.Adresse}}" aria-describedby="emailHelp">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
