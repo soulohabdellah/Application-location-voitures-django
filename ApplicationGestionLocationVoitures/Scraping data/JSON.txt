@@ -1,0 +1,102 @@
+{
+  "selection1": [
+    {
+      "image": "https://cdn2.rcstatic.com/images/car_images/new_images/fiat/500.jpg",
+      "selection2": [
+        {
+          "name": "Fiat 500"
+        },
+        {
+          "name": "Fiat 500"
+        },
+        {
+          "name": "ou similaire"
+        },
+        {
+          "name": "4 sièges\n2 petites valises"
+        },
+        {
+          "name": "4 sièges"
+        },
+        {
+          "name": "2 petites valises"
+        }
+      ]
+    },
+    {
+      "image": "https://cdn2.rcstatic.com/images/car_images/new_images/renault/twingo.jpg",
+      "selection2": [
+        {
+          "name": "Renault Twingo"
+        },
+        {
+          "name": "Renault Twingo"
+        },
+        {
+          "name": "ou similaire"
+        },
+        {
+          "name": "4 sièges\n2 petites valises"
+        },
+        {
+          "name": "4 sièges"
+        },
+        {
+          "name": "2 petites valises"
+        }
+      ]
+    },
+    {
+      "image": "https://cdn2.rcstatic.com/images/car_images/new_images/volkswagen/polo.jpg",
+      "selection2": [
+        {
+          "name": "Volkswagen Polo"
+        },
+        {
+          "name": "Volkswagen Polo"
+        },
+        {
+          "name": "ou similaire"
+        },
+        {
+          "name": "5 sièges\n1 grande valise\n1 petite valise"
+        },
+        {
+          "name": "5 sièges"
+        },
+        {
+          "name": "1 grande valise"
+        },
+        {
+          "name": "1 petite valise"
+        }
+      ]
+    },
+    {
+      "image": "https://cdn2.rcstatic.com/images/car_images/new_images/opel/corsa.jpg",
+      "selection2": [
+        {
+          "name": "Opel Corsa"
+        },
+        {
+          "name": "Opel Corsa"
+        },
+        {
+          "name": "ou similaire"
+        },
+        {
+          "name": "5 sièges\n1 grande valise\n1 petite valise"
+        },
+        {
+          "name": "5 sièges"
+        },
+        {
+          "name": "1 grande valise"
+        },
+        {
+          "name": "1 petite valise"
+        }
+      ]
+    }
+  ]
+}
