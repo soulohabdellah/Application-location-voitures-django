@@ -1,7 +1,7 @@
 
 from django.urls import path
 
-from .viewClient import UpdateCompte,voitures,voiture,contact,Home,ProfilClient,ReservationVoiture,AuthentificationClient,CreateCompte,AjouterClient,CreerMessage,GestionAuthentification,ReservationInfo,deconnexion,CreateReservation
+from .viewClient import search,UpdateCompte,voitures,voiture,contact,Home,ProfilClient,ReservationVoiture,AuthentificationClient,CreateCompte,AjouterClient,CreerMessage,GestionAuthentification,ReservationInfo,deconnexion,CreateReservation
 urlpatterns = [
     path('reserver',voitures, name='voitures'),
     path('',Home),
@@ -18,5 +18,6 @@ urlpatterns = [
     path('create-account/', CreateCompte, name='voiture'),
     path('create-account/add-user', AjouterClient, name='voiture'),
     path('authentification-client/authentifier',GestionAuthentification),
+    path('search/<str:voiture_name>/', search, name='voiture'),
 
 ]

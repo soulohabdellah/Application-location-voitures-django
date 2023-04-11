@@ -111,7 +111,7 @@ def CreateReservation(request):
         myvoiture.save()
         if 'voiture_id' in request.session:
             del request.session['voiture_id']
-        return render(request, 'InterfaceClient/ProfilClient.html',{'message':'Reservation bien creer'})
+        return redirect('/location-voitures/profil/')
  else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
 def ProfilClient(request):
@@ -147,4 +147,14 @@ def UpdateCompte(request):
             return redirect('/location-voitures/profil/')
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
+def search(request,voiture_name):
+    try:
+        voiture = Voiture.objects.get(Name=voiture_name)
+    except Voiture.DoesNotExist:
+        voiture = None
+    if voiture:
+        return render(request, 'InterfaceClient/voiture_detail.html', {'voiture': voiture})
+    else:
+        return redirect('/location-voitures/reserver')
+
 

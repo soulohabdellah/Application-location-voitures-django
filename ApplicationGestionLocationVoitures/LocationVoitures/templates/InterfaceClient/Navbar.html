@@ -1,4 +1,12 @@
+<script>
+    function rechercher(){
+    let name=document.getElementById('name').value;
 
+    window.location.href = `/location-voitures/search/${encodeURIComponent(name)}`;
+
+    }
+
+</script>
 <nav>
   <div class="logo">
      <a href="/location-voitures">Marrakech Location</a>
@@ -18,8 +26,8 @@
     </ul>
   </div>
   <div class="search">
-    <input type="text" placeholder="Rechercher...">
-    <button type="submit">OK</button>
+    <input type="text" id="name" placeholder="Rechercher...">
+    <button type="submit" onclick="rechercher()">OK</button>
 
   </div>
 
