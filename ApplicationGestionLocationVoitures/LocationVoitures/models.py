@@ -7,10 +7,12 @@ class Voiture(models.Model):
     Kilometrage=models.IntegerField(default=0)
     Couleur = models.CharField(max_length=100, default='Noir')
     NombrePlaces = models.IntegerField( default=5)
+    Climat = models.BooleanField(default=True)
     BoiteVitesse = models.CharField(max_length=100, default='Automatique')
     PrixDeLocation = models.FloatField( default=300)
     Disponible = models.BooleanField(default=True)
     MainImage = models.CharField(max_length=100,default='default.jpg')
+    Description=models.CharField(max_length=1000,default=' ')
 class Client(models.Model):
     CinOrPassportId = models.CharField(max_length=25)
     Email = models.CharField(max_length=100)

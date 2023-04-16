@@ -16,24 +16,70 @@
   </head>
 <body>
 {% include 'InterfaceClient/Navbar.html' %}
-<div class="container">
-<div class="row">
-    {% for voiture in voitures %}
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="{{ voiture.MainImage }}" class="card-img-top custom-img-size" alt="...">
-                <div class="card-body">
-                    <a href="voiture/{{voiture.id}}"><h5 class="card-title">Name : {{ voiture.Name}}</h5></a>
-                    <p class="card-text">Model : {{ voiture.Model }}</p>
-                    <p class="card-text">Marque : {{ voiture.Marque }}</p>
-
-
-
-                    <a href="/location-voitures/reservation/{{ voiture.id }}" class="btn btn-primary w-100 mt-3">Reserver</a>
-                </div>
+<div class="container mb-3">
+    <form action="/" method="GET">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="marque" class="form-label">Marque</label>
+                <select class="form-select" id="marque" name="marque">
+                    <option value="">Tous</option>
+                   {% for voiture in voitures %}
+                        <option value="{{ voiture.Marque }}">{{ voiture.Marque }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary mt-4">Filtrer</button>
             </div>
         </div>
-    {% endfor %}
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% for voiture in voitures %}
+            <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 border-0 shadow">
+                    <img src="{{ voiture.MainImage }}" class="card-img-top custom-img-size" alt="...">
+                    <div class="card-body">
+                        <a href="voiture/{{voiture.id}}"><h5 class="card-title">Name : {{ voiture.Name}}</h5></a>
+                        <div class="row">
+                        <div class="col-sm-5">
+                         <p><strong>Marque :</strong> {{ voiture.Marque }}</p>
+                        </div>
+                            <div class="col">
+                        <p><strong>Model :</strong> {{ voiture.Model }}</p>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><i class="fab fa-user"></i></div>
+                            <div class="col">{{ voiture.NombrePlaces }}</div>
+
+                            <div class="col"><i class="fa-solid fa-road" style="color: #93fbef;"></i></div>
+                            <div class="col">{{ voiture.Kilometrage }}</div>
+
+                            <div class="col"><i class="fab fa-palette"></i></div>
+                            <div class="col">{{ voiture.Couleur }}</div>
+                               <div class="col"><i class="fa-solid fa-wind" style="color: #46baec;"></i></div>
+                            <div class="col">{% if voiture.Climat %}
+                                oui
+                     {% else %}
+                         non
+                    {% endif %}</div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-sm-1"><i class="fa-solid fa-gear" style="color: #33d4d7;"></i></div>
+                            <div class="col">{{ voiture.BoiteVitesse }}</div>
+
+                        </div>
+                        <a href="/location-voitures/reservation/{{ voiture.id }}" class="btn btn-primary w-100 mt-3">Reserver</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 
 

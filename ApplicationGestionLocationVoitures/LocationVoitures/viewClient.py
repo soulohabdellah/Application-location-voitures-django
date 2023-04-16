@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Voiture, Client, Reservation,Message
 from django.contrib.auth import logout
 from .models import Voiture
-from .Forms import ClientForm, MessageForm, ClientAuthentificationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from datetime import datetime
