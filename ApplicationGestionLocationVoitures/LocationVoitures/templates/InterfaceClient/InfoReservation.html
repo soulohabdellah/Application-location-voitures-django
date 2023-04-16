@@ -54,12 +54,12 @@
       </div>
       <div class="row">
         <h2>Planification de reservation</h2>
-        <form action="/location-voitures/reservation/create-reservation" method="post">
+        <form class="was-validated" action="/location-voitures/reservation/create-reservation" method="post">
             {% csrf_token %}
           <div class="form-group">
             <label for="depart">Date et heure de départ :</label>
             <div class="input-group date" id="depart" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" id="debut"  name="debut" data-target="#depart"/>
+              <input type="text" class="form-control datetimepicker-input" id="debut"  name="debut" data-target="#depart" required/>
               <div class="input-group-append" data-target="#depart" data-toggle="datetimepicker">
                 <div class="input-group-text" onclick="afficherdate({{ voiture.PrixDeLocation }})"><i class="fa fa-calendar"></i></div>
               </div>
@@ -68,7 +68,7 @@
           <div class="form-group">
             <label for="arrivee">Date et heure de fin :</label>
             <div class="input-group date" id="arrivee" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" id="arrive" name="arrive" data-target="#arrivee"/>
+              <input type="text" class="form-control datetimepicker-input" id="arrive" name="arrive" data-target="#arrivee" required/>
               <div class="input-group-append" data-target="#arrivee" data-toggle="datetimepicker">
                 <div class="input-group-text" onclick="afficherdate({{ voiture.PrixDeLocation }})"><i class="fa fa-calendar"></i></div>
               </div>
@@ -110,6 +110,7 @@
 
 
 	});
+
 	function afficherdate(prixLocation){
     var today = moment().startOf('day');
 	var depart = moment(document.getElementById("debut").value, 'DD/MM/YYYY HH:mm:ss');

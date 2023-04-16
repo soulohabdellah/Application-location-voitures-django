@@ -35,7 +35,7 @@
             <h4 class="card-title">Contactez-nous</h4>
           </div>
           <div class="card-body">
-            <form action="message" method="post">
+            <form action="message" method="post" class="was-validated">
               {% csrf_token %}
               <div class="mb-3">
                 <label class="form-label" for="nom">Nom</label>
@@ -43,13 +43,15 @@
               </div>
               <div class="mb-3">
                 <label class="form-label" for="email">Adresse e-mail</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-              </div>
+              <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                <div class="invalid-feedback">
+                   Veuillez entrer une adresse e-mail valide.
+    </div>              </div>
               <div class="mb-3">
                 <label class="form-label" for="message">Message</label>
                 <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Envoyer</button>
+              <button id="envoyer-btn"type="submit" class="btn btn-primary">Envoyer</button>
             </form>
           </div>
         </div>
@@ -58,7 +60,28 @@
   </div>
 </br></br>
   {% include 'InterfaceClient/Footer.html' %}
+<script>
+    function checkchamps(){
 
+  const nom = document.getElementById("nom");
+  const email = document.getElementById("email");
+  const message = document.getElementById("message");
+
+  const envoyerBtn = document.getElementById("envoyer-btn");
+  if ( nom.value != "" && email.value != "" && message.value != "" ) {
+    envoyerBtn.disabled = false;
+  } else {
+    envoyerBtn.disabled = true;
+  }
+}
+
+ document.getElementById("envoyer-btn").disabled = true;
+const inputs = document.querySelectorAll('input, textarea');
+for (let i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener('change', checkchamps);
+}
+
+</script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

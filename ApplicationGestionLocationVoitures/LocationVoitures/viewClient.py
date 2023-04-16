@@ -52,18 +52,22 @@ def CreateCompte(request):
 
 def AjouterClient(request):
     if request.method == 'POST':
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            client = form.save(commit=False)
-            client.Password = make_password(form.cleaned_data['Password'])
-            client.save()
-            request.session['client_id'] = client.id
-            request.session['client_name'] = client.Nom
+        email = request.POST['email']
+        cin_or_passport_id = request.POST['CinOrPassportId']
+        prenom = request.POST['Prenom']
+        nom = request.POST['Nom']
+        telephone = request.POST['Telephone']
+        adresse = request.POST['Adresse']
+        password = make_password(request.POST['Password'])
+        if Client.objects.filter(Email=email).exists():
+                return render(request, 'InterfaceClient/InscriptionClient.html', {'message': 'Email exist'})
+        else:
+                client = Client(Nom=nom,Prenom=prenom,Email=email,Password=password, CinOrPassportId=cin_or_passport_id, Telephone=telephone,Adresse=adresse)
+                client.save()
+                request.session['client_id'] = client.id
+                request.session['client_name'] = client.Nom
+                return redirect('/location-voitures')
 
-            return redirect('/location-voitures')
-    else:
-        form = ClientForm()
-    return render(request, 'InterfaceClient/Home.html', {'form': form})
 
 
 def CreerMessage(request):
@@ -82,7 +86,7 @@ def GestionAuthentification(request):
         password = request.POST['Password']
         clients = Client.objects.filter(Email=email)
         if not clients:
-            error_message = 'Invalid email or password'
+            error_message = 'Mot de passe ou email pas correct'
             form = ClientAuthentificationForm()
             return render(request, 'InterfaceClient/AuthentificationClient.html',
                           {'form': form, 'message': error_message})
@@ -91,7 +95,7 @@ def GestionAuthentification(request):
                 request.session['client_id'] = client.id
                 request.session['client_name'] = client.Nom
                 return redirect('/location-voitures')
-        error_message = 'Invalid email or password'
+        error_message = 'Mot de passe ou email pas correct'
         form = ClientAuthentificationForm()
         return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'message': error_message})
     else:
@@ -129,7 +133,11 @@ def CreateReservation(request):
             myvoiture.save()
             if 'voiture_id' in request.session:
                 del request.session['voiture_id']
-            return render(request, 'InterfaceClient/ProfilClient.html', {'message': 'Reservation bien creer'})
+                client_id = request.session.get('client_id')
+                if client_id:
+                    reservations = Reservation.FindByClient(client_id)
+                    myclient = get_object_or_404(Client, id=client_id)
+                    return render(request, 'InterfaceClient/ProfilClient.html',{'reservations': reservations, 'client': myclient,'message': 'Reservation bien creer'})
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
 
@@ -174,10 +182,10 @@ def UpdateCompte(request):
 
 def search(request, voiture_name):
     try:
-        voiture = Voiture.objects.get(Name=voiture_name)
+        voiture = Voiture.objects.get(Name=voiture_name,Disponible=True)
     except Voiture.DoesNotExist:
         voiture = None
     if voiture:
         return render(request, 'InterfaceClient/voiture_detail.html', {'voiture': voiture})
     else:
-        return redirect('/location-voitures/reserver')
+        return render(request, 'InterfaceClient/Home.html',{'message': 'Voiture introuvable'})
