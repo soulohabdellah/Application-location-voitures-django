@@ -15,7 +15,7 @@
 </head>
 <body>
 {% include 'InterfaceClient/Navbar.html' %}
-</br></br></br><div class="container mt-5">
+<div class="container mt-5">
   <div class="row">
     <div class="col-md-6">
       <div class="card" >
@@ -111,12 +111,15 @@
 
 	});
 	function afficherdate(prixLocation){
-
+    var today = moment().startOf('day');
 	var depart = moment(document.getElementById("debut").value, 'DD/MM/YYYY HH:mm:ss');
 	var arrive = moment(document.getElementById("arrive").value, 'DD/MM/YYYY HH:mm:ss');
 	var difference = arrive.diff(depart, 'days');
-
-	if(difference <= 0) {
+    if(depart < today || arrive < today) {
+		alert("La date de départ et arrive doit etre commancer au moins aujourd'hui");
+		document.getElementById("reservation-btn").disabled=true;
+	}
+	else if(difference <= 0) {
 		alert("La date de départ doit être antérieure à la date d'arrivée.");
 		document.getElementById("reservation-btn").disabled=true;
 	} else {
@@ -129,7 +132,7 @@
 
 	}
 	</script>
-
+</br></br>
  {% include 'InterfaceClient/Footer.html' %}
 </body>
 </html>

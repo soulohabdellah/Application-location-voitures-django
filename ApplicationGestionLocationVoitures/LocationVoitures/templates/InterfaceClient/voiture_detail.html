@@ -19,45 +19,47 @@
 
     <title>Location des voitures</title>
   </head>
-<body>
+ <body>
+    <!-- Barre de navigation -->
+    {% include 'InterfaceClient/Navbar.html' %}
 
-{% include 'InterfaceClient/Navbar.html' %}
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="{{ voiture.MainImage }}" alt="Product Image" class="img-fluid custom-img-size">
+        </div>
 
+        <div class="col-md-6">
+          <h3 class="mb-4">{{ voiture.Name }}</h3>
 
-<div class="container">
-<div class="row">
+          <p class="text-muted mb-4">Marque : {{ voiture.Marque }}</p>
+          <p class="text-muted mb-4">Modèle : {{ voiture.Model }}</p>
+          <p class="text-muted mb-4">Boîte de vitesse : {{ voiture.BoiteVitesse }}</p>
+          <p class="text-muted mb-4">Couleur : {{ voiture.Couleur }}</p>
+          <p class="text-muted mb-4">Kilométrage : {{ voiture.Kilometrage }} km</p>
+          <p class="text-muted mb-4">Nombre de places : {{ voiture.NombrePlaces }}</p>
 
-  <div class="col-sm-12-mb-3">
-   <div class="card" >
-  <img src="{{ voiture.MainImage }}" class="card-img-top custom-img-size" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Name : {{ voiture.Name}}</h5>
-    <p class="card-text">Model : {{ voiture.Model }}</p>
-      <p class="card-text">Marque : {{ voiture.Marque }}</p>
+          <div class="mb-4">
+            <span class="font-weight-bold mr-2">Prix :</span>
+            <span class="text-danger">{{ voiture.PrixDeLocation }} DH</span>
+          </div>
 
-      <p>Boite vitesse : {{ voiture.BoiteVitesse}}</p>
-    <p>Couleur : {{ voiture.Couleur }}</p>
-      <p>Kilometrage : {{ voiture.Kilometrage }}</p>
-    <p>Nombre de places : {{ voiture.NombrePlaces }}</p>
-      <p>Prix de location : {{ voiture.PrixDeLocation }} DH</p>
+          <a href="/location-voitures/reservation/{{ voiture.id }}" class="btn btn-primary">Réserver</a>
+        </div>
+      </div>
+    </div>
 
- <a href="/location-voitures/reservation/{{ voiture.id}}" class="btn btn-primary">Reserver</a>
-  </div>
-</div>
-  </div>
-
-
-</div>
-
-</div>
- <script>
- function avancer(voiture_id){
-   const id = voiture_id;
-  localStorage.setItem("voiture_id", id);
-  window.location.href = "/location-voitures/reservation";
-  }
+    <script>
+      function avancer(voiture_id) {
+        const id = voiture_id;
+        localStorage.setItem("voiture_id", id);
+        window.location.href = "/location-voitures/reservation";
+      }
     </script>
-{% include 'InterfaceClient/Footer.html' %}
+</br>
+    </br>
+    <!-- Pied de page -->
+    {% include 'InterfaceClient/Footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

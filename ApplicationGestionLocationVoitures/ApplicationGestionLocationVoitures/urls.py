@@ -20,5 +20,4 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('location-voitures/', include('LocationVoitures.urlsApp')),
-    #path('admin/', include('AdminSide.urlsApp')),
 ]

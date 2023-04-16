@@ -1,27 +1,36 @@
-from django.shortcuts import render,get_object_or_404,redirect
-from .models import Voiture,Client,Reservation
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Voiture, Client, Reservation,Message
 from django.contrib.auth import logout
 from .models import Voiture
-from .Forms import ClientForm,MessageForm,ClientAuthentificationForm
-from  django.contrib.auth.hashers import make_password
+from .Forms import ClientForm, MessageForm, ClientAuthentificationForm
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from datetime import datetime
+
+
 def voitures(request):
-    voitures=Voiture.objects.filter(Disponible=True)
-    return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures})
-def voiture(request,voiture_id):
-    voiture=get_object_or_404(Voiture,id=voiture_id,Disponible=True)
+    voitures = Voiture.objects.filter(Disponible=True)
+    return render(request, 'InterfaceClient/NosVehicules.html', {'voitures': voitures})
+
+
+def voiture(request, voiture_id):
+    voiture = get_object_or_404(Voiture, id=voiture_id, Disponible=True)
     if voiture:
-        return  render(request,'InterfaceClient/voiture_detail.html',{'voiture':voiture})
+        return render(request, 'InterfaceClient/voiture_detail.html', {'voiture': voiture})
     else:
-         return  render(request,'InterfaceClient/NosVehicules.html',{'voitures':voitures,'message':'Voiture introuvable'})
+        return render(request, 'InterfaceClient/NosVehicules.html',
+                      {'voitures': voitures, 'message': 'Voiture introuvable'})
+
 
 def contact(request):
-        return render(request, 'InterfaceClient/Contact.html')
+    return render(request, 'InterfaceClient/Contact.html')
+
 
 def Home(request):
-    return render(request,'InterfaceClient/Home.html')
-def ReservationVoiture(request,voiture_id):
+    return render(request, 'InterfaceClient/Home.html')
+
+
+def ReservationVoiture(request, voiture_id):
     client_id = request.session.get('client_id')
     if client_id:
         if 'voiture_id' in request.session:
@@ -30,13 +39,17 @@ def ReservationVoiture(request,voiture_id):
         voiture = get_object_or_404(Voiture, id=voiture_id)
         return render(request, 'InterfaceClient/InfoReservation.html', {'voiture': voiture})
     else:
-        return  render(request,'InterfaceClient/AuthentificationClient.html')
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
+
 
 def AuthentificationClient(request):
+    return render(request, 'InterfaceClient/AuthentificationClient.html')
 
-    return  render(request,'InterfaceClient/AuthentificationClient.html')
+
 def CreateCompte(request):
-    return  render(request,'InterfaceClient/InscriptionClient.html')
+    return render(request, 'InterfaceClient/InscriptionClient.html')
+
+
 def AjouterClient(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
@@ -52,16 +65,17 @@ def AjouterClient(request):
         form = ClientForm()
     return render(request, 'InterfaceClient/Home.html', {'form': form})
 
+
 def CreerMessage(request):
     if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'InterfaceClient/Contact.html', {'message': 'Message bien envoyée'})
+        nom = request.POST.get('nom')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        nouveau_message = Message(Nom=nom, Email=email, Message=message)
+        nouveau_message.save()
+        return render(request, 'InterfaceClient/Contact.html', {'message': 'Message bien envoyé'})
     else:
-        form = MessageForm()
-    return render(request, 'InterfaceClient/Home.html', {'form': form})
-
+        return render(request, 'InterfaceClient/Home.html')
 def GestionAuthentification(request):
     if request.method == 'POST':
         email = request.POST['Email']
@@ -70,7 +84,8 @@ def GestionAuthentification(request):
         if not clients:
             error_message = 'Invalid email or password'
             form = ClientAuthentificationForm()
-            return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'message': error_message})
+            return render(request, 'InterfaceClient/AuthentificationClient.html',
+                          {'form': form, 'message': error_message})
         for client in clients:
             if check_password(password, client.Password):
                 request.session['client_id'] = client.id
@@ -83,6 +98,7 @@ def GestionAuthentification(request):
         form = ClientAuthentificationForm()
     return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form})
 
+
 def ReservationInfo(request):
     client_id = request.session.get('client_id')
     if client_id:
@@ -90,38 +106,43 @@ def ReservationInfo(request):
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
 
+
 def CreateReservation(request):
- client_id = request.session.get('client_id')
- if client_id:
-    format_string = "%d/%m/%Y %H:%M:%S"
-    if request.method == 'POST':
-        myvoiture_id = request.session.get('voiture_id')
-        myclient_id = request.session.get('client_id')
-        if not myvoiture_id or not myclient_id:
-            return render(request, 'InterfaceClient/InfoReservation.html')
-        myvoiture = get_object_or_404(Voiture, id=myvoiture_id)
-        myclient = get_object_or_404(Client, id=myclient_id)
-        date_debut = datetime.strptime(request.POST['debut'], format_string).date()
-        date_fin = datetime.strptime(request.POST['arrive'], format_string).date()
-        diff = (date_fin - date_debut).days
-        prixtotal=diff*myvoiture.PrixDeLocation
-        reservation = Reservation(client=myclient, voiture=myvoiture, date_debut=date_debut, date_fin=date_fin, prix_total=prixtotal)
-        reservation.save()
-        myvoiture.Disponible=False
-        myvoiture.save()
-        if 'voiture_id' in request.session:
-            del request.session['voiture_id']
-        return redirect('/location-voitures/profil/')
- else:
+    client_id = request.session.get('client_id')
+    if client_id:
+        format_string = "%d/%m/%Y %H:%M:%S"
+        if request.method == 'POST':
+            myvoiture_id = request.session.get('voiture_id')
+            myclient_id = request.session.get('client_id')
+            if not myvoiture_id or not myclient_id:
+                return render(request, 'InterfaceClient/InfoReservation.html')
+            myvoiture = get_object_or_404(Voiture, id=myvoiture_id)
+            myclient = get_object_or_404(Client, id=myclient_id)
+            date_debut = datetime.strptime(request.POST['debut'], format_string).date()
+            date_fin = datetime.strptime(request.POST['arrive'], format_string).date()
+            diff = (date_fin - date_debut).days
+            prixtotal = diff * myvoiture.PrixDeLocation
+            reservation = Reservation(client=myclient, voiture=myvoiture, date_debut=date_debut, date_fin=date_fin,
+                                      prix_total=prixtotal)
+            reservation.save()
+            myvoiture.Disponible = False
+            myvoiture.save()
+            if 'voiture_id' in request.session:
+                del request.session['voiture_id']
+            return render(request, 'InterfaceClient/ProfilClient.html', {'message': 'Reservation bien creer'})
+    else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
+
+
 def ProfilClient(request):
     client_id = request.session.get('client_id')
     if client_id:
-            reservations = Reservation.FindByClient(client_id)
-            myclient = get_object_or_404(Client, id=client_id)
-            return render(request, 'InterfaceClient/ProfilClient.html', {'reservations': reservations,'client':myclient})
+        reservations = Reservation.FindByClient(client_id)
+        myclient = get_object_or_404(Client, id=client_id)
+        return render(request, 'InterfaceClient/ProfilClient.html', {'reservations': reservations, 'client': myclient})
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
+
 
 def deconnexion(request):
     if 'client_id' in request.session:
@@ -130,6 +151,8 @@ def deconnexion(request):
         del request.session['voiture_id']
     logout(request)
     return redirect('/location-voitures')
+
+
 def UpdateCompte(request):
     client_id = request.session.get('client_id')
 
@@ -147,7 +170,9 @@ def UpdateCompte(request):
             return redirect('/location-voitures/profil/')
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
-def search(request,voiture_name):
+
+
+def search(request, voiture_name):
     try:
         voiture = Voiture.objects.get(Name=voiture_name)
     except Voiture.DoesNotExist:
@@ -156,5 +181,3 @@ def search(request,voiture_name):
         return render(request, 'InterfaceClient/voiture_detail.html', {'voiture': voiture})
     else:
         return redirect('/location-voitures/reserver')
-
-
