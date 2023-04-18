@@ -17,19 +17,19 @@
 <body>
 {% include 'InterfaceClient/Navbar.html' %}
 <div class="container mb-3">
-    <form action="/" method="GET">
+    <form >
         <div class="row">
             <div class="col-md-3">
                 <label for="marque" class="form-label">Marque</label>
                 <select class="form-select" id="marque" name="marque">
                     <option value="">Tous</option>
-                   {% for voiture in voitures %}
-                        <option value="{{ voiture.Marque }}">{{ voiture.Marque }}</option>
+                   {% for marque in marques %}
+                        <option value="{{ marque }}">{{ marque }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary mt-4">Filtrer</button>
+                <button onclick="filter()" type="submit" class="btn btn-primary mt-4">Filtrer</button>
             </div>
         </div>
     </form>
@@ -87,7 +87,15 @@
 </br>
 {% include 'InterfaceClient/Footer.html' %}
 
+<script>
+    function filter(){
+    var selectElement = document.getElementById("marque");
+    var selectedValue = selectElement.value;
+    window.location.href = "/location-voitures/voitures?marque=" + selectedValue;
 
+    }
+
+</script>
 
 
 

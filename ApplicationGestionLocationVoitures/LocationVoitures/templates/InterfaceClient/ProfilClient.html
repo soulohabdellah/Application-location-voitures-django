@@ -41,6 +41,7 @@
         }
     </style>
 	<title>Profil Client</title>
+       <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="..." crossorigin="anonymous" />
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -66,7 +67,7 @@
       {% for reservation in reservations %}
       <div class="card" >
         <div class="card-body">
-          <h5 class="card-title"><strong>{{ reservation.voiture }}</strong> de <strong>{{ reservation.debut }}</strong> à <strong>{{ reservation.fin }}</strong>  avec <strong>{{ reservation.prix }} DH</strong></h5>
+          <h5 class="card-title"><a href="{{reservation.id}}"><i class="fa-solid fa-eye" style="color: #47b4c2;"></i></a><strong>  {{ reservation.voiture }}</strong> de <strong>{{ reservation.debut }}</strong> à <strong>{{ reservation.fin }}</strong>  avec <strong>{{ reservation.prix }} DH</strong> </h5>
         </div>
       </div>
       {% endfor %}
@@ -127,6 +128,7 @@
 
 </br>
 </br>
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>

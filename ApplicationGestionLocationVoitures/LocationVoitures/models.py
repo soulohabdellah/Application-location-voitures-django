@@ -51,7 +51,15 @@ class Reservation(models.Model):
     @classmethod
     def FindByClient(cls, client_id):
         reservations = cls.objects.filter(client_id=client_id).values_list('prix_total', 'date_debut', 'date_fin',
-                                                                           'voiture__Name')
-        listres = [{'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
+                                                                           'voiture__Name','id')
+        listres = [{'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
                     'voiture': item[3]} for item in reservations]
         return listres
+    @classmethod
+    def FindById(cls, reservation_id):
+        reservations = cls.objects.filter(id=reservation_id).values_list('prix_total', 'date_debut', 'date_fin',
+                                                                           'voiture__Name','id')
+        listres = [{'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
+                    'voiture': item[3]} for item in reservations]
+        return listres
+
