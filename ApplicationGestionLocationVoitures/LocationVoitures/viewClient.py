@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Voiture, Client, Reservation,Message
+from .models import Voiture, Client, Reservation, Message
 from django.contrib.auth import logout
 from .models import Voiture
 from django.contrib.auth.hashers import make_password
@@ -59,14 +59,14 @@ def AjouterClient(request):
         adresse = request.POST['Adresse']
         password = make_password(request.POST['Password'])
         if Client.objects.filter(Email=email).exists():
-                return render(request, 'InterfaceClient/InscriptionClient.html', {'message': 'Email exist'})
+            return render(request, 'InterfaceClient/InscriptionClient.html', {'message': 'Email exist'})
         else:
-                client = Client(Nom=nom,Prenom=prenom,Email=email,Password=password, CinOrPassportId=cin_or_passport_id, Telephone=telephone,Adresse=adresse)
-                client.save()
-                request.session['client_id'] = client.id
-                request.session['client_name'] = client.Nom
-                return redirect('/location-voitures')
-
+            client = Client(Nom=nom, Prenom=prenom, Email=email, Password=password, CinOrPassportId=cin_or_passport_id,
+                            Telephone=telephone, Adresse=adresse)
+            client.save()
+            request.session['client_id'] = client.id
+            request.session['client_name'] = client.Nom
+            return redirect('/location-voitures')
 
 
 def CreerMessage(request):
@@ -79,6 +79,8 @@ def CreerMessage(request):
         return render(request, 'InterfaceClient/Contact.html', {'message': 'Message bien envoyé'})
     else:
         return render(request, 'InterfaceClient/Home.html')
+
+
 def GestionAuthentification(request):
     if request.method == 'POST':
         email = request.POST['Email']
@@ -136,7 +138,9 @@ def CreateReservation(request):
                 if client_id:
                     reservations = Reservation.FindByClient(client_id)
                     myclient = get_object_or_404(Client, id=client_id)
-                    return render(request, 'InterfaceClient/ProfilClient.html',{'reservations': reservations, 'client': myclient,'message': 'Reservation bien creer'})
+                    return render(request, 'InterfaceClient/ProfilClient.html',
+                                  {'reservations': reservations, 'client': myclient,
+                                   'message': 'Reservation bien creer'})
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
 
@@ -181,10 +185,10 @@ def UpdateCompte(request):
 
 def search(request, voiture_name):
     try:
-        voiture = Voiture.objects.get(Name=voiture_name,Disponible=True)
+        voiture = Voiture.objects.get(Name=voiture_name, Disponible=True)
     except Voiture.DoesNotExist:
         voiture = None
     if voiture:
         return render(request, 'InterfaceClient/voiture_detail.html', {'voiture': voiture})
     else:
-        return render(request, 'InterfaceClient/Home.html',{'message': 'Voiture introuvable'})
+        return render(request, 'InterfaceClient/Home.html', {'message': 'Voiture introuvable'})

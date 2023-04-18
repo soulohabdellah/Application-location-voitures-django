@@ -26,5 +26,7 @@ urlpatterns = [
 
     # admin urls
     path('admin', homeds),
-    path('admin/client', clientds, name='client-url')
+    path('admin/client', client_list, name='client-url'),
+    path('admin/voiture', voiture_list, name='voiture-url'),
+    path('admin/reservation', reservation_list, name='reservation-url')
 ]
