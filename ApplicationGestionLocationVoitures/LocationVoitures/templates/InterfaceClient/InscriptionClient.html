@@ -66,13 +66,52 @@
                   <input type="text" class="form-control" id="Adresse" name="Adresse" placeholder="Entrez votre adresse" required>
                 </div>
                   <div class="form-group">
-                  <label for="password">Mot de passe</label>
-                  <input type="password" class="form-control" id="password" name="Password" placeholder="Entrez votre mot de passe" required>
-                </div>
-                  <div class="form-group">
-                  <label for="Confirm">Confirmation mot de passe</label>
-                  <input type="password" class="form-control" id="confirm" name="Confirm" placeholder="Redonnez le mot de passe" required>
-                </div>
+  <label for="password">Mot de passe</label>
+  <input type="password" class="form-control" id="password" name="Password" placeholder="Entrez votre mot de passe" required>
+  <div class="invalid-feedback">Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.</div>
+</div>
+<div class="form-group">
+  <label for="confirm">Confirmation mot de passe</label>
+  <input type="password" class="form-control" id="confirm" name="Confirm" placeholder="Redonnez le mot de passe" required>
+  <div class="invalid-feedback">Les mots de passe ne correspondent pas.</div>
+</div>
+
+<script>
+  var passwordInput = document.getElementById("password");
+  var confirmInput = document.getElementById("confirm");
+
+  passwordInput.addEventListener("input", function () {
+    var password = passwordInput.value;
+    var hasUpperCase = /[A-Z]/.test(password);
+    var hasLowerCase = /[a-z]/.test(password);
+    var hasDigit = /\d/.test(password);
+    var hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+    var isValid = hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
+
+    if (isValid) {
+      passwordInput.classList.add("is-valid");
+      passwordInput.classList.remove("is-invalid");
+    } else {
+      passwordInput.classList.add("is-invalid");
+      passwordInput.classList.remove("is-valid");
+    }
+  });
+
+  confirmInput.addEventListener("input", function () {
+    var password = passwordInput.value;
+    var confirm = confirmInput.value;
+    var isValid = confirm === password;
+
+    if (isValid) {
+      confirmInput.classList.add("is-valid");
+      confirmInput.classList.remove("is-invalid");
+    } else {
+      confirmInput.classList.add("is-invalid");
+      confirmInput.classList.remove("is-valid");
+    }
+  });
+</script>
+
                 <button id="inscription-btn" type="submit" class="btn btn-primary btn-block">Se inscrit</button>
               </form>
 
