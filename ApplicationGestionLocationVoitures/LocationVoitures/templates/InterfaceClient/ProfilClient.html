@@ -9,7 +9,7 @@
             color: #333;
         }
 
-        .container {
+        #container {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -60,16 +60,23 @@
     </div>
 
   {% endif %}
-<div class="container mt-5">
+
+<div class="container mt-5" id="container" name="container">
   <div class="row">
     <div class="col-md-7">
       <h2>Historique des réservations</h2>
 {% for reservation in reservations %}
-  <div class="card">
+        {% if reservation.payee == False %}
+
+  <div class="card" style="background-color:#FC7A6F;">
+      {%else%}
+  <div class="card" style="background-color:#79F5B0;">
+
+      {%endif%}
     <div class="card-body">
       <div class="row">
         <div class="col-md-8">
-          <h5 class="card-title"><strong>{{ reservation.voiture }}</strong> de <strong>{{ reservation.debut }}</strong> à <strong>{{ reservation.fin }}</strong> avec <strong>{{ reservation.prix }} DH</strong></h5>
+          <h5 class="card-title"><strong>{{ reservation.voiture }}</strong> de <strong>{{ reservation.debut }}</strong> à <strong>{{ reservation.fin }}</strong> avec <strong>{{ reservation.prix }}DH</strong></h5>
         </div>
         <div class="col">
           {% if reservation.payee == False %}
@@ -77,9 +84,9 @@
               <input type="hidden" value="soulohAbdellah2020@business.example.com" name="business">
               <input type="hidden" value="_xclick" name="cmd">
               <input type="hidden" value="AM Test Item" name="item_name">
-              {% with result=reservation.prix|divide:10%}
-                <input type="hidden" value="{{result}}" name="amount">
-              {% endwith %}
+
+                <input type="hidden" value="{{reservation.prix_usd}}" name="amount">
+
               <input type="hidden" name="currency_code" value="USD">
               <input type="hidden" value="item_number" name="item_number">
               <input type="hidden" name="return" value="http://127.0.0.1:8000/location-voitures/payer/{{ reservation.id }}">
@@ -199,7 +206,7 @@ for (let i = 0; i < inputs.length; i++) {
   checkpassword();
 
 </script>
-
+</div>
  {% include 'InterfaceClient/Footer.html' %}
 </body>
 </html>

@@ -46,7 +46,7 @@ class Reservation(models.Model):
     def FindByClient(cls, client_id):
         reservations = cls.objects.filter(client_id=client_id).values_list('prix_total', 'date_debut', 'date_fin',
                                                                            'voiture__Name','id','payee')
-        listres = [{'payee': item[5],'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
+        listres = [{'prix_usd':(item[0]/10),'payee': item[5],'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
                     'voiture': item[3]} for item in reservations]
         return listres
 
