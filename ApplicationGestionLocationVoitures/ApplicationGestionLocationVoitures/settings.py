@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'LocationVoitures',
+    'paypal.standard.ipn',
 ]
 
 MIDDLEWARE = [
@@ -76,7 +77,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'locationvoiture',
         'USER': 'root',
-        'PASSWORD': 'P@$$w0rd',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -125,4 +126,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     BASE_DIR / "static",
 #
 # ]
-
+PAYPAL_TEST=True
+PAYPAL_RECEIVER_EMAIL='sandbox@gmail.com'
