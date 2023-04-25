@@ -128,3 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ]
 PAYPAL_TEST=True
 PAYPAL_RECEIVER_EMAIL='sandbox@gmail.com'
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'

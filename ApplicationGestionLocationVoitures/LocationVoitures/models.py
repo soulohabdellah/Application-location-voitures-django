@@ -39,27 +39,21 @@ class Reservation(models.Model):
     prix_total = models.FloatField()
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     voiture = models.ForeignKey(Voiture, on_delete=models.CASCADE)
+    payee = models.BooleanField(default=False)
 
-    def __init__(self, client, voiture, date_debut, date_fin, prix_total, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.client = client
-        self.voiture = voiture
-        self.date_debut = date_debut
-        self.date_fin = date_fin
-        self.prix_total = prix_total
 
     @classmethod
     def FindByClient(cls, client_id):
         reservations = cls.objects.filter(client_id=client_id).values_list('prix_total', 'date_debut', 'date_fin',
-                                                                           'voiture__Name','id')
-        listres = [{'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
-                    'voiture': item[3]} for item in reservations]
-        return listres
-    @classmethod
-    def FindById(cls, reservation_id):
-        reservations = cls.objects.filter(id=reservation_id).values_list('prix_total', 'date_debut', 'date_fin',
-                                                                           'voiture__Name','id')
-        listres = [{'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
+                                                                           'voiture__Name','id','payee')
+        listres = [{'payee': item[5],'id':item[4],'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
                     'voiture': item[3]} for item in reservations]
         return listres
 
+    @classmethod
+    def FindById(cls, reservation_id):
+        reservations = cls.objects.filter(id=reservation_id).values_list('prix_total', 'date_debut', 'date_fin',
+                                                                         'voiture__Name', 'id', 'payee')
+        listres = [{'payee': item[5], 'id': item[4], 'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'),
+                    'fin': item[2].strftime('%d/%m/%Y'), 'voiture': item[3]} for item in reservations]
+        return listres

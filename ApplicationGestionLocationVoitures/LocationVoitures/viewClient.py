@@ -7,6 +7,18 @@ from .models import Voiture
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from datetime import datetime
+from django.shortcuts import render
+
+def payement(request,reservation_id):
+    client_id = request.session.get('client_id')
+    if client_id:
+        myreservation = get_object_or_404(Reservation, id=reservation_id)
+        myreservation.payee = True
+        myreservation.save()
+        return redirect('/location-voitures/profil')
+    else:
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
+
 
 
 def voitures(request):
@@ -151,13 +163,7 @@ def CreateReservation(request):
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
 
-def DetailsReservation(request,reservation_id):
-    client_id = request.session.get('client_id')
-    if client_id:
-        reservations = Reservation.FindById(reservation_id)
-        return render(request, 'InterfaceClient/DetailCommande.html', {'reservations': reservations})
-    else:
-        return render(request, 'InterfaceClient/AuthentificationClient.html')
+
 def ProfilClient(request):
     client_id = request.session.get('client_id')
     if client_id:
