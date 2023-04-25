@@ -10,8 +10,13 @@ from datetime import datetime
 
 
 def voitures(request):
-    voitures = Voiture.objects.filter(Disponible=True)
-    return render(request, 'InterfaceClient/NosVehicules.html', {'voitures': voitures})
+    marque = request.GET.get('marque')
+    if marque:
+        voitures = Voiture.objects.filter(Disponible=True,Marque=marque)
+    else:
+        voitures = Voiture.objects.filter(Disponible=True)
+    marques = Voiture.objects.filter(Disponible=True).values_list('Marque', flat=True).distinct()
+    return render(request, 'InterfaceClient/NosVehicules.html', {'voitures': voitures,'marques':marques})
 
 
 def voiture(request, voiture_id):
@@ -146,7 +151,13 @@ def CreateReservation(request):
     else:
         return render(request, 'InterfaceClient/AuthentificationClient.html')
 
-
+def DetailsReservation(request,reservation_id):
+    client_id = request.session.get('client_id')
+    if client_id:
+        reservations = Reservation.FindById(reservation_id)
+        return render(request, 'InterfaceClient/DetailCommande.html', {'reservations': reservations})
+    else:
+        return render(request, 'InterfaceClient/AuthentificationClient.html')
 def ProfilClient(request):
     client_id = request.session.get('client_id')
     if client_id:
