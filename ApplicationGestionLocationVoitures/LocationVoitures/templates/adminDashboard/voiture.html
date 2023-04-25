@@ -15,13 +15,13 @@
         <!-- Button to open the modal -->
         {#        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open Modal</button>#}
 
-        <!-- Modal -->
+        <!-- Modal de creation-->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Modal Title</h5>
+                        <h5 class="modal-title" id="myModalLabel">Création d'une voiture</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -29,101 +29,106 @@
                     <div class="modal-body">
                         <form method="POST" class="container">
                             {% csrf_token %}
+                            {{ form.as_p }}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="name">Name:</label>#}
+                            {#                                <input type="text" id="name" name="name" maxlength="100" required class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="model">Model:</label>#}
+                            {#                                <input type="text" id="model" name="model" maxlength="100" required#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="marque">Marque:</label>#}
+                            {#                                <input type="text" id="marque" name="marque" maxlength="100" required#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="kilometrage">Kilometrage:</label>#}
+                            {#                                <input type="number" id="kilometrage" name="kilometrage" min="0" required#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="couleur">Couleur:</label>#}
+                            {#                                <input type="text" id="couleur" name="couleur" maxlength="100" value="Noir"#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="nombre_places">Nombre de places:</label>#}
+                            {#                                <input type="number" id="nombre_places" name="nombre_places" min="1" max="10" value="5"#}
+                            {#                                       required class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="climat">Climatisation:</label>#}
+                            {#                                <div class="form-check">#}
+                            {#                                    <input type="checkbox" id="climat" name="climat" checked class="form-check-input">#}
+                            {#                                    <label class="form-check-label " for="climat">Oui</label>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="boite_vitesse">Boîte de vitesse:</label>#}
+                            {#                                <select id="boite_vitesse" name="boite_vitesse" class="form-control">#}
+                            {#                                    <option value="Automatique" selected>Automatique</option>#}
+                            {#                                    <option value="Manuelle">Manuelle</option>#}
+                            {#                                </select>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="prix_location">Prix de location:</label>#}
+                            {#                                <div class="input-group">#}
+                            {#                                    <div class="input-group-prepend">#}
+                            {#                                        <span class="input-group-text">MAD</span>#}
+                            {#                                    </div>#}
+                            {#                                    <input type="number" id="prix_location" name="prix_location" min="0" step="0.01"#}
+                            {#                                           value="300" required class="form-control">#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="disponible">Disponibilité:</label>#}
+                            {#                                <div class="form-check">#}
+                            {#                                    <input type="checkbox" id="disponible" name="disponible" checked#}
+                            {#                                           class="form-check-input">#}
+                            {#                                    <label class="form-check-label" for="disponible">Oui</label>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="main_image">Image principale:</label>#}
+                            {#                                <input type="text" id="main_image" name="main_image" maxlength="100" value="default.jpg"#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="description">Description:</label>#}
+                            {#                                <textarea id="description" name="description" rows="5" maxlength="1000"#}
+                            {#                                          class="form-control"></textarea>#}
+                            {#                            </div>#}
+                            </br>
                             <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" id="name" name="name" maxlength="100" required class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="model">Model:</label>
-                                <input type="text" id="model" name="model" maxlength="100" required
-                                       class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="marque">Marque:</label>
-                                <input type="text" id="marque" name="marque" maxlength="100" required
-                                       class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="kilometrage">Kilometrage:</label>
-                                <input type="number" id="kilometrage" name="kilometrage" min="0" required
-                                       class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="couleur">Couleur:</label>
-                                <input type="text" id="couleur" name="couleur" maxlength="100" value="Noir"
-                                       class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="nombre_places">Nombre de places:</label>
-                                <input type="number" id="nombre_places" name="nombre_places" min="1" max="10" value="5"
-                                       required class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="climat">Climatisation:</label>
-                                <div class="form-check">
-                                    <input type="checkbox" id="climat" name="climat" checked class="form-check-input">
-                                    <label class="form-check-label" for="climat">Oui</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="boite_vitesse">Boîte de vitesse:</label>
-                                <select id="boite_vitesse" name="boite_vitesse" class="form-control">
-                                    <option value="Automatique" selected>Automatique</option>
-                                    <option value="Manuelle">Manuelle</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="prix_location">Prix de location:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                    <input type="number" id="prix_location" name="prix_location" min="0" step="0.01"
-                                           value="300" required class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="disponible">Disponibilité:</label>
-                                <div class="form-check">
-                                    <input type="checkbox" id="disponible" name="disponible" checked
-                                           class="form-check-input">
-                                    <label class="form-check-label" for="disponible">Oui</label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="main_image">Image principale:</label>
-                                <input type="text" id="main_image" name="main_image" maxlength="100" value="default.jpg"
-                                       class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description:</label>
-                                <textarea id="description" name="description" rows="5" maxlength="1000"
-                                          class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                <button type="submit" class="btn btn-dark btn-sm">Enregistrer</button>
                             </div>
                         </form>
 
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        {#                        <button type="submit" class="btn btn-dark btn-sm">Submit</button>#}
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- modal d'update -->
+
 
         <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -161,7 +166,11 @@
                         <td>{{ voiture.Description }}</td>
                         <td>{{ voiture.MainImage }}</td>
                         <td>
-                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button data-toggle="modal" data-target="#editModal"><i
+                                    class="fa-solid fa-pen-to-square"></i></button>
+                            {#<button class="editBtn"><i class="fa-solid fa-pen-to-square"></i></button>#}
+                            {#                            <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Modifier#}
+                            {#                            </button>#}
                             <button><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
@@ -171,4 +180,113 @@
             </table>
         </div>
     </main>
+
+    <!-- Modal update -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Modifier les valeurs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="model">Modèle</label>
+                            <input type="text" class="form-control" id="model">
+                        </div>
+                        <div class="form-group">
+                            <label for="marque">Marque</label>
+                            <input type="text" class="form-control" id="marque">
+                        </div>
+                        <div class="form-group">
+                            <label for="km">Km</label>
+                            <input type="text" class="form-control" id="km">
+                        </div>
+                        <div class="form-group">
+                            <label for="couleur">Couleur</label>
+                            <input type="text" class="form-control" id="couleur">
+                        </div>
+                        <div class="form-group">
+                            <label for="nb">Nb</label>
+                            <input type="text" class="form-control" id="nb">
+                        </div>
+                        <div class="form-group">
+                            <label for="climat">Climat</label>
+                            <input type="text" class="form-control" id="climat">
+                        </div>
+                        <div class="form-group">
+                            <label for="bt">Bt</label>
+                            <input type="text" class="form-control" id="bt">
+                        </div>
+                        <div class="form-group">
+                            <label for="prix">Prix</label>
+                            <input type="text" class="form-control" id="prix">
+                        </div>
+                        <div class="form-group">
+                            <label for="disponible">Disponible</label>
+                            <input type="text" class="form-control" id="disponible">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="text" class="form-control" id="image">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Écoute les clics sur les boutons "Modifier" dans chaque ligne de tableau
+        var editButtons = document.querySelectorAll('table tbody tr button');
+        for (var i = 0; i < editButtons.length; i++) {
+            editButtons[i].addEventListener('click', function () {
+                // Récupère les valeurs de la ligne de tableau correspondante
+                var name = this.parentElement.parentElement.querySelector('td:nth-child(1)').innerText;
+                var model = this.parentElement.parentElement.querySelector('td:nth-child(2)').innerText;
+                var marque = this.parentElement.parentElement.querySelector('td:nth-child(3)').innerText;
+                var km = this.parentElement.parentElement.querySelector('td:nth-child(4)').innerText;
+                var couleur = this.parentElement.parentElement.querySelector('td:nth-child(5)').innerText;
+                var nb = this.parentElement.parentElement.querySelector('td:nth-child(6)').innerText;
+                var climat = this.parentElement.parentElement.querySelector('td:nth-child(7)').innerText;
+                var bt = this.parentElement.parentElement.querySelector('td:nth-child(8)').innerText;
+                var prix = this.parentElement.parentElement.querySelector('td:nth-child(9)').innerText;
+                var disponible = this.parentElement.parentElement.querySelector('td:nth-child(10)').innerText;
+                var description = this.parentElement.parentElement.querySelector('td:nth-child(11)').innerText;
+                var image = this.parentElement.parentElement.querySelector('td:nth-child(12)').innerText;
+
+                // Remplit les champs de la modal avec les valeurs récupérées
+                document.getElementById('name').value = name;
+                document.getElementById('model').value = model;
+                document.getElementById('marque').value = marque;
+                document.getElementById('km').value = km;
+                document.getElementById('couleur').value = couleur;
+                document.getElementById('nb').value = nb;
+                document.getElementById('climat').value = climat;
+                document.getElementById('bt').value = bt;
+                document.getElementById('prix').value = prix;
+                document.getElementById('disponible').value = disponible;
+                document.getElementById('description').value = description;
+                document.getElementById('image').value = image;
+            });
+        }
+    </script>
+
+
 {% endblock %}
