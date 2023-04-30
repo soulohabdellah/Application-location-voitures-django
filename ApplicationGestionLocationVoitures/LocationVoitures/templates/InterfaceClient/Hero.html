@@ -7,8 +7,32 @@
 					<a href="reserver" class="btn btn-primary">Réserver maintenant</a>
 				</div>
 				<div class="col-md-6">
-					<img src="https://www.marrakech-cityguide.com/wp-content/uploads/location-voiture-premium-maroc-1024x683.jpeg" alt="Location de voitures" class="img-fluid">
+ <div class="row">
+        <div id="map"></div>
+ </div>
+
 				</div>
 			</div>
 		</div>
 	</section>
+<script>
+
+  //Affichage de map
+  var map;
+      function initMap() {
+        var myLatLng = {lat: 31.660166, lng: -8.021305};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: myLatLng
+        });
+
+        // Ajoutez un marqueur à la carte
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Marrakech location'
+        });
+      }
+ </script>
+   <script src="https://cdn.jsdelivr.net/gh/somanchiu/Keyless-Google-Maps-API@v5.9/mapsJavaScriptAPI.js"async defer></script>
