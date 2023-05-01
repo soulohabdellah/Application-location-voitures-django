@@ -11,13 +11,15 @@ car_list = soup.find_all("div", {"class": "col-xl-3 col-lg-4 col-md-6"})
 cars = []
 
 for car in car_list:
-    car_name = car.find("div", {"class": "landing-cb-class ellipsis"}).text.strip()
-    car_price = car.find("div", {"class": "landing-cb-info"}).text.strip()
-    car_image = car.find("div", {"class": "landing-cb-car"}).find("img")["src"]
+    car_name = car.find("div", {"class": "landing-cb-wrap pt-0"}).text.strip()
+    car_price = car.find("div", {"class": "landing-cb-price-block"}).text.strip()
+    car_image = car.find("div", {"class": "landing-cb-car"}).find("img")["data-src"]
+    car_info = car.find("div", {"class": "landing-cb-car-params"}).text.strip()
     car_data = {
         "name": car_name,
         "price": car_price,
-        "image": car_image
+        "image": car_image,
+        "info":car_info
     }
     cars.append(car_data)
 
