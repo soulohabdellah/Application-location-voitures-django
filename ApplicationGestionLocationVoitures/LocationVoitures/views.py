@@ -16,7 +16,7 @@ def homeds(resquest):
         count = len(data)
     file.close()
     return render(resquest, 'adminDashboard/home.html',
-                  {'client': client, 'voiture': voitures, 'reservation': reservations, 'scraping': count })
+                  {'client': client, 'voiture': voitures, 'reservation': reservations, 'scraping': count})
 
 
 def client_list(request):
@@ -53,4 +53,6 @@ def reservation_list(request):
 #         return render(request, 'adminDashboard/reservation.html', {'form': form})
 
 def scraped_list(request):
-    return render(request, 'adminDashboard/scraped.html')
+    with open('Scraping data/car_rentals.json', 'r') as f:
+        car_data = json.load(f)
+    return render(request, 'adminDashboard/scraped.html', {'cars': car_data})

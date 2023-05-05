@@ -88,52 +88,50 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-striped table-sm" id="myTable">
+          <table class="table table-striped table-sm">
                 <thead>
                 <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Details</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Nombre de places</th>
+                    <th scope="col">Nombre de valise</th>
+                    <th scope="col">Nombre de portes</th>
+                    <th scope="col">Climat</th>
+                    <th scope="col">Bt</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+
+                {% for voiture in cars %}
+                    <tr>
+                        <td>{{ voiture.name }}</td>
+                        <td>{{ voiture.price }}</td>
+                        <td>{{ voiture.image }}</td>
+                        <td>{{ voiture.passengers }}</td>
+                        <td>{{ voiture.luggage }}</td>
+                        <td>{{ voiture.doors }}</td>
+                        <td>{{ voiture.ac }}</td>
+                        <td>{{ voiture.gearbox }}</td>
+
+                        <td>
+                            <button data-toggle="modal" data-target="#editModal"><i
+                                    class="fa-solid fa-pen-to-square"></i></button>
+                            {#<button class="editBtn"><i class="fa-solid fa-pen-to-square"></i></button>#}
+                            {#                            <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Modifier#}
+                            {#                            </button>#}
+                            <button><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
         </div>
     </main>
-    <script>
-        const tableBody = document.querySelector("#myTable tbody");
 
-        fetch("{% static 'data/cars.json' %}")
-            .then(response => response.json())
-            .then(data => {
-                data.selection1.forEach(car => {
-                    const row = document.createElement("tr");
 
-                    const imageCell = document.createElement("td");
-                    const image = document.createElement("img");
-                    image.src = car.image;
-                    image.alt = car.selection2[0].name;
-                    imageCell.appendChild(image);
-                    row.appendChild(imageCell);
-
-                    const nameCell = document.createElement("td");
-                    nameCell.textContent = car.selection2[0].name;
-                    row.appendChild(nameCell);
-
-                    const detailsCell = document.createElement("td");
-                    const detailsList = document.createElement("ul");
-                    car.selection2.slice(1).forEach(detail => {
-                        const item = document.createElement("li");
-                        item.textContent = detail.name;
-                        detailsList.appendChild(item);
-                    });
-                    detailsCell.appendChild(detailsList);
-                    row.appendChild(detailsCell);
-
-                    tableBody.appendChild(row);
-                });
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
 {% endblock %}
