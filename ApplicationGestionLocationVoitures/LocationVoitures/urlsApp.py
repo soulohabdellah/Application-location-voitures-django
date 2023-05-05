@@ -29,5 +29,6 @@ urlpatterns = [
     path('admin', homeds),
     path('admin/client', client_list, name='client-url'),
     path('admin/voiture', voiture_list, name='voiture-url'),
-    path('admin/reservation', reservation_list, name='reservation-url')
+    path('admin/reservation', reservation_list, name='reservation-url'),
+    path('admin/scraped', scraped_list, name='scraped-url')
 ]

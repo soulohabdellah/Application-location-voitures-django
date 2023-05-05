@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Dacia Logan",
+        "price": 13.05,
+        "image": "https://www.discovercars.com/images/car/8401/150.png",
+        "passengers": "5",
+        "luggage": "3",
+        "doors": "5",
+        "ac": true,
+        "gearbox": "manual"
+    },
+    {
+        "name": "Dacia Logan",
+        "price": 13.53,
+        "image": "https://mapama-img.s3-eu-central-1.amazonaws.com/images/150/b43e17e74ed245e6ba47ea678d562362.png",
+        "passengers": "4",
+        "luggage": "2",
+        "doors": "4",
+        "ac": false,
+        "gearbox": "manual"
+    },
+    {
+        "name": "Kia Picanto",
+        "price": 14.49,
+        "image": "https://www.discovercars.com/images/car/3776/150.png",
+        "passengers": "4",
+        "luggage": "1",
+        "doors": "4",
+        "ac": true,
+        "gearbox": "manual"
+    },
+    {
+        "name": "Dacia Dokker",
+        "price": 23.65,
+        "image": "https://www.discovercars.com/images/car/8031/150.png",
+        "passengers": "5",
+        "luggage": "2",
+        "doors": "5",
+        "ac": true,
+        "gearbox": "manual"
+    },
+    {
+        "name": "Dacia Logan",
+        "price": 24.16,
+        "image": "https://mapama-img.s3-eu-central-1.amazonaws.com/images/150/b43e17e74ed245e6ba47ea678d562362.png",
+        "passengers": "5",
+        "luggage": "2",
+        "doors": "4",
+        "ac": true,
+        "gearbox": "manual"
+    },
+    {
+        "name": "Dacia Logan",
+        "price": 29.5,
+        "image": "https://www.discovercars.com/images/car/8401/150.png",
+        "passengers": "5",
+        "luggage": "1",
+        "doors": "4",
+        "ac": true,
+        "gearbox": "manual"
+    }
+]

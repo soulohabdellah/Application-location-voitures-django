@@ -32,12 +32,15 @@ def reservation_list(request):
     return render(request, 'adminDashboard/reservation.html', context)
 
 
-def create_car(request):
-    if request.method == 'POST':
-        form = VoitureForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('voiture_list')
-        else:
-            form = VoitureForm()
-        return render(request, 'adminDashboard/reservation.html', {'form': form})
+# def create_car(request):
+#     if request.method == 'POST':
+#         form = VoitureForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('voiture_list')
+#         else:
+#             form = VoitureForm()
+#         return render(request, 'adminDashboard/reservation.html', {'form': form})
+
+def scraped_list(request):
+    return render(request, 'adminDashboard/scraped.html')
