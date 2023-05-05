@@ -2,12 +2,13 @@
 Notre application web est une plateforme de location de voitures développée avec Django. Elle permet aux utilisateurs de rechercher, louer et gérer leur location de voiture en ligne.
 
 ## Fonctionnalités
-* Recherche de voitures disponibles en fonction de la date et de la ville de départ/arrivée
+* Recherche de voitures disponibles.
 * Réservation de voiture en ligne.
-* Gestion des réservations pour les utilisateurs enregistrés
-* Système de paiement en ligne sécurisé pour le paiement des réservations avec **Paypal**
-* Tableau de bord administrateur pour la gestion des voitures et des réservations
-* Technologies utilisées
+* Gestion des réservations pour les utilisateurs enregistrés.
+* Système de paiement en ligne sécurisé pour le paiement des réservations avec **Paypal**.
+* Tableau de bord administrateur pour la gestion des voitures et des réservations.
+* Scraping des données : scraping des voitures depuis le site **[discovercars](https://www.discovercars.com/fr/morocco?keyword=location%20voiture%20maroc&network=g&gclid=CjwKCAjw586hBhBrEiwAQYEnHeFSL-3_5SYsg8X5poNJrK4MpY6DHH7XKuE2f8XJYQgQXfQ904ZvCRoCsCQQAvD_BwE)**
+## Technologies utilisées
 
   - Django framework
   - HTML/CSS/JavaScript pour l'interface utilisateur et d'administrateur
