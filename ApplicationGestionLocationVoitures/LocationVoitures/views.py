@@ -1,12 +1,22 @@
 from django.shortcuts import render, redirect
 from .models import Client, Voiture, Reservation
 from .Forms import VoitureForm
+import json
 
 
 # Admin Dashboard views
 
 def homeds(resquest):
-    return render(resquest, 'adminDashboard/home.html')
+    client = Client.objects.all().count()
+    voitures = Voiture.objects.all().count()
+    reservations = Reservation.objects.all().count()
+    filename = 'Scraping data/car_rentals.json'
+    with open(filename) as file:
+        data = json.load(file)
+        count = len(data)
+    file.close()
+    return render(resquest, 'adminDashboard/home.html',
+                  {'client': client, 'voiture': voitures, 'reservation': reservations, 'scraping': count })
 
 
 def client_list(request):

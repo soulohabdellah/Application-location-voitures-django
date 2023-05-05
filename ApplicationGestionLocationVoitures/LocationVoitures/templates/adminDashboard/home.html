@@ -24,10 +24,7 @@
                         {#                            <img src="..." class="card-img-top" alt="...">#}
                         <div class="card-body">
                             <h5 class="card-title">Client</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of
-                                the
-                                card's content.</p>
+                            <p class="card-text " style="font-size: 40px; font-weight: bold;">{{ client }}</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <a href="{% url 'client-url' %}" class="btn btn-dark">
@@ -48,10 +45,7 @@
                         {#                            <img src="..." class="card-img-top" alt="...">#}
                         <div class="card-body">
                             <h5 class="card-title">Voiture</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of
-                                the
-                                card's content.</p>
+                            <p class="card-text" style="font-size: 40px; font-weight: bold;">{{ voiture }}</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <a href="{% url 'voiture-url' %}" class="btn btn-dark">
@@ -72,14 +66,33 @@
                     <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
                         {#                            <img src="..." class="card-img-top" alt="...">#}
                         <div class="card-body">
-                            <h5 class="card-title">Voiture Scraped</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of
-                                the
-                                card's content.</p>
+                            <h5 class="card-title">Scraping</h5>
+                            <p class="card-text" style="font-size: 40px; font-weight: bold;">{{ scraping }}</p>
                             <div class="row">
                                 <div class="col-md-3">
                                     <a href="#" class="btn btn-dark">
+                                        <i class="fa-solid fa-list"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="#" class="btn btn-dark">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
+                        {#                            <img src="..." class="card-img-top" alt="...">#}
+                        <div class="card-body">
+                            <h5 class="card-title">Resevation</h5>
+                            <p class="card-text" style="font-size: 40px; font-weight: bold;">{{ reservation }}</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="{% url 'voiture-url' %}" class="btn btn-dark">
                                         <i class="fa-solid fa-list"></i>
                                     </a>
                                 </div>

@@ -2,12 +2,12 @@ from django.urls import path
 
 from .viewClient import search, UpdateCompte, voitures, voiture, contact, Home, ProfilClient, ReservationVoiture, \
     AuthentificationClient, CreateCompte, AjouterClient, CreerMessage, GestionAuthentification, ReservationInfo, \
-    deconnexion, CreateReservation,payement
+    deconnexion, CreateReservation, payement
 
 from .views import *
 
 urlpatterns = [
-    path('payer/<int:reservation_id>/',payement),
+    path('payer/<int:reservation_id>/', payement),
     path('reserver', voitures, name='voitures'),
     path('', Home),
     path('authentification-client', AuthentificationClient),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('search/<str:voiture_name>/', search, name='voiture'),
 
     # admin urls
-    path('admin', homeds),
+    path('admin', homeds, name='home'),
     path('admin/client', client_list, name='client-url'),
     path('admin/voiture', voiture_list, name='voiture-url'),
     path('admin/reservation', reservation_list, name='reservation-url'),
