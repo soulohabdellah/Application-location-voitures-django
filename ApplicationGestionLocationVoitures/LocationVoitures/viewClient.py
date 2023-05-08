@@ -114,7 +114,11 @@ def GestionAuthentification(request):
             if check_password(password, client.Password):
                 request.session['client_id'] = client.id
                 request.session['client_name'] = client.Nom
-                return redirect('/location-voitures')
+                if 'voiture_id' in request.session and request.session['voiture_id']:
+                    return redirect('/location-voitures/reservation/' + request.session['voiture_id'])
+                else:
+                    return redirect('/location-voitures')
+
         error_message = 'Mot de passe ou email pas correct'
         form = ClientAuthentificationForm()
         return render(request, 'InterfaceClient/AuthentificationClient.html', {'form': form, 'message': error_message})

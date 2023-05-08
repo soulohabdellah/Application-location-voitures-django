@@ -39,6 +39,7 @@ class Reservation(models.Model):
     prix_total = models.FloatField()
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     voiture = models.ForeignKey(Voiture, on_delete=models.CASCADE)
+    payee = models.BooleanField(default=False)
 
     # def __init__(self, client, voiture, date_debut, date_fin, prix_total, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -51,9 +52,9 @@ class Reservation(models.Model):
     @classmethod
     def FindByClient(cls, client_id):
         reservations = cls.objects.filter(client_id=client_id).values_list('prix_total', 'date_debut', 'date_fin',
-                                                                           'voiture__Name', 'id')
+                                                                           'voiture__Name', 'id','payee')
         listres = [
-            {'id': item[4], 'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
+            {'prix_usd':item[0]/10,'payee':item[5],'id': item[4], 'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
              'voiture': item[3]} for item in reservations]
         return listres
 
