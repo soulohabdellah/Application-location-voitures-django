@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView
 from django.urls import path
 
 from .viewClient import search, UpdateCompte, voitures, voiture, contact, Home, ProfilClient, ReservationVoiture, \
@@ -30,5 +31,12 @@ urlpatterns = [
     path('admin/client', client_list, name='client-url'),
     path('admin/voiture', voiture_list, name='voiture-url'),
     path('admin/reservation', reservation_list, name='reservation-url'),
-    path('admin/scraped', scraped_list, name='scraped-url')
+    path('admin/scraped', scraped_list, name='scraped-url'),
+    path('login/', admin_login, name='login'),
+
+
+
+
+
+
 ]

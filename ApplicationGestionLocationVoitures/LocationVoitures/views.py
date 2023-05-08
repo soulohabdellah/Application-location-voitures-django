@@ -2,6 +2,19 @@ from django.shortcuts import render, redirect
 from .models import Client, Voiture, Reservation
 from .Forms import VoitureForm
 import json
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .Forms import LoginForm
+from django.contrib.auth import authenticate
+from django.contrib import messages, auth
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
+
+
+
+
 
 
 # Admin Dashboard views
@@ -56,3 +69,29 @@ def scraped_list(request):
     with open('Scraping data/car_rentals.json', 'r') as f:
         car_data = json.load(f)
     return render(request, 'adminDashboard/scraped.html', {'cars': car_data})
+#login_admin
+from django.shortcuts import redirect
+
+from django.shortcuts import redirect
+
+def admin_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None and user.is_staff:
+                if username == 'admin' and password == 'admin':
+                    return redirect('http://localhost:8000/location-voitures/admin')
+                else:
+                    login(request, user)
+                    return redirect('home')
+            else:
+                messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
+        else:
+            messages.error(request, 'Nom d\'utilisateur ou mot de passe incorrect.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'adminDashboard/login.html', {'form': form})
+
