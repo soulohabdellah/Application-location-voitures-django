@@ -4,26 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
-  <h1>Login Page</h1>
-  <form action="" method="post">
+  <div class="container">
+    <h1 class="text-center my-5">Login Page</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form action="" method="post">
 
-    {% csrf_token %}
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <button type="submit">Login</button>
-  </form>
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+        </form>
+      </div>
+    </div>
 
-  {% if request.POST %}
-    {% if request.POST.username == 'admin' and request.POST.password == 'admin' %}
-      <script>window.location.href = "http://localhost:8000/location-voitures/admin";</script>
+    {% if request.POST %}
+      {% if request.POST.username == 'admin' and request.POST.password == 'admin' %}
+        <script>window.location.href = "http://localhost:8000/location-voitures/admin";</script>
+      {% endif %}
     {% endif %}
-  {% endif %}
+  </div>
 
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+          integrity="sha384-UdIOc1i7AVWnnt9S5G6U5g6k1DZf5CE8Ed4CvxJg4B+tdrbBQF0o08q7OQxopxwv"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
 </html>
