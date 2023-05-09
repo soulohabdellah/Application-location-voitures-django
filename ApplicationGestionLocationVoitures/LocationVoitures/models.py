@@ -66,3 +66,8 @@ class Reservation(models.Model):
             {'id': item[4], 'prix': item[0], 'debut': item[1].strftime('%d/%m/%Y'), 'fin': item[2].strftime('%d/%m/%Y'),
              'voiture': item[3]} for item in reservations]
         return listres
+
+
+class Admin(models.Model):
+    password = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
