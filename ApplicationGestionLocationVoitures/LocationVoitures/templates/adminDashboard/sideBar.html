@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link"href="{% url 'home' %}">
+                <a class="nav-link" href="{% url 'home' %}">
                     <span data-feather="home"></span>
                     Dashboard
                 </a>
@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"href="{% url 'reservation-url' %}">
+                <a class="nav-link" href="{% url 'reservation-url' %}">
                     <i class="fa-solid fa-calendar-check"></i>
                     <span style="margin-left: 5px;">Reservation</span>
                 </a>
@@ -29,6 +29,12 @@
                 <a class="nav-link" href="{% url 'scraped-url' %}">
                     <i class="fa-solid fa-file-import"></i>
                     <span style="margin-left: 5px;">Scraping des voitures</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'message-url' %}">
+                   <i class="fa-sharp fa-solid fa-message"></i>
+                    <span style="margin-left: 5px;">Message</span>
                 </a>
             </li>
 
