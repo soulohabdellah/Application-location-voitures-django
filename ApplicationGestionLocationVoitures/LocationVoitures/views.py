@@ -64,6 +64,20 @@ def message_list(request):
     return render(request, 'adminDashboard/message.html', context)
 
 
+def delete_voiture(request,id):
+    # voiture = get_object_or_404(Voiture, id=id)
+    # voiture.delete()
+    Voiture.objects.filter(id=id).delete()
+    return redirect('voiture-url')
+
+
+def delete_client(request,id):
+    # voiture = get_object_or_404(Voiture, id=id)
+    # voiture.delete()
+    Client.objects.filter(id=id).delete()
+    return redirect('client-url')
+
+
 
 # def create_car(request):
 #     if request.method == 'POST':

@@ -33,11 +33,8 @@ urlpatterns = [
     path('admin/reservation', reservation_list, name='reservation-url'),
     path('admin/scraped', scraped_list, name='scraped-url'),
     path('login/', admin_login, name='login'),
-    path('admin/message',message_list,name= 'message-url')
-
-
-
-
-
+    path('admin/message',message_list,name= 'message-url'),
+    path('admin/location-voitures/admin/voiture/<int:id>', delete_voiture, name='delete'),
+    path('admin/location-voitures/admin/client/<int:id>', delete_client, name='delete'),
 
 ]
