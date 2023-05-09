@@ -70,7 +70,7 @@
                             <p class="card-text" style="font-size: 40px; font-weight: bold;">{{ scraping }}</p>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="#" class="btn btn-dark">
+                                     <a href="{% url 'scraped-url' %}" class="btn btn-dark">
                                         <i class="fa-solid fa-list"></i>
                                     </a>
                                 </div>
@@ -93,6 +93,28 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <a href="{% url 'voiture-url' %}" class="btn btn-dark">
+                                        <i class="fa-solid fa-list"></i>
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="#" class="btn btn-dark">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
+                        {#                            <img src="..." class="card-img-top" alt="...">#}
+                        <div class="card-body">
+                            <h5 class="card-title">Message</h5>
+                            <p class="card-text" style="font-size: 40px; font-weight: bold;">{{ message }}</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="{% url 'message-url' %}" class="btn btn-dark">
                                         <i class="fa-solid fa-list"></i>
                                     </a>
                                 </div>

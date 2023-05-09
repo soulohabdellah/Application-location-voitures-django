@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Client, Voiture, Reservation
-from .Forms import VoitureForm
+from .models import Client, Voiture, Reservation, Message
+from .Forms import VoitureForm, ClientForm ,MessageForm
 import json
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -13,28 +13,32 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
 
-
-
-
-
 # Admin Dashboard views
 
 def homeds(resquest):
     client = Client.objects.all().count()
     voitures = Voiture.objects.all().count()
     reservations = Reservation.objects.all().count()
+    messages = Message.objects.all().count()
     filename = 'Scraping data/car_rentals.json'
     with open(filename) as file:
         data = json.load(file)
         count = len(data)
     file.close()
     return render(resquest, 'adminDashboard/home.html',
-                  {'client': client, 'voiture': voitures, 'reservation': reservations, 'scraping': count})
+                  {'client': client, 'voiture': voitures, 'reservation': reservations, 'scraping': count, 'message': messages})
 
 
 def client_list(request):
     cls = Client.objects.all()
-    return render(request, 'adminDashboard/client.html', {'cls': cls})
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('client-url')
+    else:
+        form = ClientForm()
+    return render(request, 'adminDashboard/client.html', {'cls': cls,'form': form})
 
 
 def voiture_list(request):
@@ -54,6 +58,12 @@ def reservation_list(request):
     context = {'reservations': reservations}
     return render(request, 'adminDashboard/reservation.html', context)
 
+def message_list(request):
+    messages = Message.objects.all()
+    context = {'messages': messages}
+    return render(request, 'adminDashboard/message.html', context)
+
+
 
 # def create_car(request):
 #     if request.method == 'POST':
@@ -68,11 +78,21 @@ def reservation_list(request):
 def scraped_list(request):
     with open('Scraping data/car_rentals.json', 'r') as f:
         car_data = json.load(f)
-    return render(request, 'adminDashboard/scraped.html', {'cars': car_data})
-#login_admin
+    if request.method == 'POST':
+        form = VoitureForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('voiture-url')
+    else:
+        form = VoitureForm()
+    return render(request, 'adminDashboard/scraped.html', {'cars': car_data, 'form': form})
+
+
+# login_admin
 from django.shortcuts import redirect
 
 from django.shortcuts import redirect
+
 
 def admin_login(request):
     if request.method == 'POST':
@@ -94,4 +114,3 @@ def admin_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'adminDashboard/login.html', {'form': form})
-

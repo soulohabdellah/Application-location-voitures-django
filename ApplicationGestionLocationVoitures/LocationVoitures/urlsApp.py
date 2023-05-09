@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/reservation', reservation_list, name='reservation-url'),
     path('admin/scraped', scraped_list, name='scraped-url'),
     path('login/', admin_login, name='login'),
+    path('admin/message',message_list,name= 'message-url')
 
 
 

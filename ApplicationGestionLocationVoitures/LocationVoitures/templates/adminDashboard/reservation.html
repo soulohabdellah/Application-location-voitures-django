@@ -97,6 +97,7 @@
                     <th>Prix total</th>
                     <th>Client</th>
                     <th>Voiture</th>
+                    <th>payement</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -110,8 +111,8 @@
                         <td>{{ reservation.prix_total }}</td>
                         <td>{{ reservation.client.Nom }}</td>
                         <td>{{ reservation.voiture.Name }} {{ reservation.voiture.Marque }}</td>
+                        <td>{{ reservation.payee }}</td>
                         <td>
-                            <button><i class="fa-solid fa-pen-to-square"></i></button>
                             <button><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>

@@ -1,0 +1,117 @@
+{% extends 'adminDashboard/base.html' %}
+{% block corps %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Liste des messages</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-dark " data-toggle="modal"
+                            data-target="#myModal"><i
+                            class="fa-solid fa-plus fa-xl"></i></button>
+                </div>
+            </div>
+        </div>
+
+        {#            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>#}
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Modal Title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" class="container">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="cin_or_passport_id">CIN or Passport ID:</label>
+                                <input type="text" id="cin_or_passport_id" name="cin_or_passport_id" maxlength="25"
+                                       required class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" maxlength="100" required
+                                       class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nom">Nom:</label>
+                                <input type="text" id="nom" name="nom" maxlength="100" required class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="prenom">Prenom:</label>
+                                <input type="text" id="prenom" name="prenom" maxlength="100" required
+                                       class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" maxlength="250" required
+                                       class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telephone">Telephone:</label>
+                                <input type="tel" id="telephone" name="telephone" maxlength="30" required
+                                       class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="adresse">Adresse:</label>
+                                <textarea id="adresse" name="adresse" rows="5" maxlength="200" required
+                                          class="form-control"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">Email</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Statut de lecture</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for msg in messages %}
+                    <tr>
+                        <td>{{ msg.Email }}</td>
+                        <td>{{ msg.Nom }}</td>
+                        <td>{{ msg.Message }}</td>
+                        <td>{{ msg.Lu }}</td>
+
+                        <td>
+                            <button><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

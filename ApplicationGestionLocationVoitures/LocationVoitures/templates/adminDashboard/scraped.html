@@ -16,12 +16,12 @@
         {#        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open Modal</button>#}
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Modal Title</h5>
+                        <h5 class="modal-title" id="myModalLabel">Création d'une voiture</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -29,59 +29,99 @@
                     <div class="modal-body">
                         <form method="POST" class="container">
                             {% csrf_token %}
+                            {{ form.as_p }}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="name">Name:</label>#}
+                            {#                                <input type="text" id="name" name="name" maxlength="100" required class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="model">Model:</label>#}
+                            {#                                <input type="text" id="model" name="model" maxlength="100" required#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="marque">Marque:</label>#}
+                            {#                                <input type="text" id="marque" name="marque" maxlength="100" required#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="kilometrage">Kilometrage:</label>#}
+                            {#                                <input type="number" id="kilometrage" name="kilometrage" min="0" required#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="couleur">Couleur:</label>#}
+                            {#                                <input type="text" id="couleur" name="couleur" maxlength="100" value="Noir"#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="nombre_places">Nombre de places:</label>#}
+                            {#                                <input type="number" id="nombre_places" name="nombre_places" min="1" max="10" value="5"#}
+                            {#                                       required class="form-control">#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="climat">Climatisation:</label>#}
+                            {#                                <div class="form-check">#}
+                            {#                                    <input type="checkbox" id="climat" name="climat" checked class="form-check-input">#}
+                            {#                                    <label class="form-check-label " for="climat">Oui</label>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="boite_vitesse">Boîte de vitesse:</label>#}
+                            {#                                <select id="boite_vitesse" name="boite_vitesse" class="form-control">#}
+                            {#                                    <option value="Automatique" selected>Automatique</option>#}
+                            {#                                    <option value="Manuelle">Manuelle</option>#}
+                            {#                                </select>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="prix_location">Prix de location:</label>#}
+                            {#                                <div class="input-group">#}
+                            {#                                    <div class="input-group-prepend">#}
+                            {#                                        <span class="input-group-text">MAD</span>#}
+                            {#                                    </div>#}
+                            {#                                    <input type="number" id="prix_location" name="prix_location" min="0" step="0.01"#}
+                            {#                                           value="300" required class="form-control">#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="disponible">Disponibilité:</label>#}
+                            {#                                <div class="form-check">#}
+                            {#                                    <input type="checkbox" id="disponible" name="disponible" checked#}
+                            {#                                           class="form-check-input">#}
+                            {#                                    <label class="form-check-label" for="disponible">Oui</label>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="main_image">Image principale:</label>#}
+                            {#                                <input type="text" id="main_image" name="main_image" maxlength="100" value="default.jpg"#}
+                            {#                                       class="form-control">#}
+                            {#                            </div>#}
+                            {#                            <div class="form-group">#}
+                            {#                                <label for="description">Description:</label>#}
+                            {#                                <textarea id="description" name="description" rows="5" maxlength="1000"#}
+                            {#                                          class="form-control"></textarea>#}
+                            {#                            </div>#}
+                            </br>
                             <div class="form-group">
-                                <label for="date_debut">Date de début:</label>
-                                <input type="datetime-local" id="date_debut" name="date_debut" required
-                                       class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date_fin">Date de fin:</label>
-                                <input type="datetime-local" id="date_fin" name="date_fin" required
-                                       class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="prix_total">Prix total:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">DH</span>
-                                    </div>
-                                    <input type="number" id="prix_total" name="prix_total" min="0" step="0.01" required
-                                           class="form-control">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="client">Client:</label>
-                                <select id="client" name="client" required class="form-control">
-                                    <option value="" disabled selected>Choisissez un client</option>
-                                    {% for client in clients %}
-                                        <option value="{{ client.id }}">{{ client.nom }} {{ client.prenom }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="voiture">Voiture:</label>
-                                <select id="voiture" name="voiture" required class="form-control">
-                                    <option value="" disabled selected>Choisissez une voiture</option>
-                                    {% for voiture in voitures %}
-                                        <option value="{{ voiture.id }}">{{ voiture.marque }} {{ voiture.modele }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                <button type="submit" class="btn btn-dark btn-sm">Enregistrer</button>
                             </div>
                         </form>
 
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                        {#                        <button type="submit" class="btn btn-dark btn-sm">Submit</button>#}
                     </div>
                 </div>
             </div>
@@ -99,7 +139,7 @@
                     <th scope="col">Nombre de portes</th>
                     <th scope="col">Climat</th>
                     <th scope="col">Bt</th>
-                    <th scope="col"></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -115,14 +155,7 @@
                         <td>{{ voiture.ac }}</td>
                         <td>{{ voiture.gearbox }}</td>
 
-                        <td>
-                            <button data-toggle="modal" data-target="#editModal"><i
-                                    class="fa-solid fa-pen-to-square"></i></button>
-                            {#<button class="editBtn"><i class="fa-solid fa-pen-to-square"></i></button>#}
-                            {#                            <button class="btn btn-primary" data-toggle="modal" data-target="#editModal">Modifier#}
-                            {#                            </button>#}
-                            <button><i class="fa-solid fa-trash"></i></button>
-                        </td>
+                       
                     </tr>
                 {% endfor %}
 
